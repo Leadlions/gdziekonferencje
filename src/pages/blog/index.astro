@@ -1,0 +1,49 @@
+﻿---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import BlogPostCard from '../../components/BlogPostCard.astro';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+
+const breadcrumbs = [{ name: 'Blog', url: 'https://gdzie-konferencje.pl/blog/' }];
+---
+
+<Base
+  title="Blog - konferencje stomatologiczne, punkty edukacyjne | gdzie-konferencje.pl"
+  description="Praktyczna wiedza dla dentystów: punkty edukacyjne NIL, dofinansowanie szkoleń, jak pisać abstrakty i jak wybierać konferencje stomatologiczne."
+  breadcrumbs={breadcrumbs}
+>
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <nav class="mb-6 text-sm text-slate-500">
+      <ol class="flex items-center gap-1.5">
+        <li><a href="/" class="hover:text-brand-700">Strona główna</a></li>
+        <li class="text-slate-300">/</li>
+        <li class="font-medium text-slate-800" aria-current="page">Blog</li>
+      </ol>
+    </nav>
+
+    <h1 class="text-3xl font-bold text-slate-900">Blog ekspercki</h1>
+    <p class="mt-2 text-slate-500">
+      Praktyczna wiedza dla lekarzy dentystów, techników dentystycznych i branży stomatologicznej.
+    </p>
+
+    {posts.length === 0 ? (
+      <div class="mt-12 rounded-xl border border-dashed border-slate-300 bg-slate-50 px-6 py-16 text-center">
+        <p class="text-slate-500">Pierwsze artykuły już wkrótce.</p>
+      </div>
+    ) : (
+      <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map(post => (
+          <BlogPostCard
+            title={post.data.title}
+            description={post.data.description}
+            publishedAt={post.data.publishedAt}
+            tags={post.data.tags}
+            href={`/blog/${post.slug}/`}
+          />
+        ))}
+      </div>
+    )}
+  </div>
+</Base>

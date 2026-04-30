@@ -1,0 +1,173 @@
+[
+  {
+    "name": "VIII Kongres Stomatologii PTS",
+    "date": "4-6 września 2025",
+    "city": "Nadarzyn (Ptak Warsaw Expo)",
+    "specialty": "Stomatologia ogólna",
+    "slugs": ["stomatologia"],
+    "organizer": "Polskie Towarzystwo Stomatologiczne",
+    "url": "https://www.kongresstomatologii.pl/"
+  },
+  {
+    "name": "WawaDent 2025 – Interdyscyplinarna Stomatologia w Praktyce",
+    "date": "24-25 października 2025",
+    "city": "Warszawa",
+    "specialty": "Stomatologia ogólna",
+    "slugs": ["stomatologia"],
+    "organizer": "Forum Media Polska",
+    "url": "https://www.konferencja-stomatologiczna.pl/"
+  },
+  {
+    "name": "XIV Łódzkie Spotkania Stomatologiczne",
+    "date": "26-28 września 2025",
+    "city": "Słok k. Bełchatowa",
+    "specialty": "Stomatologia ogólna",
+    "slugs": ["stomatologia"],
+    "organizer": "Okręgowa Izba Lekarska w Łodzi",
+    "url": "https://nil.org.pl/dla-lekarzy/dla-stomatologow/8749-wydarzenia-stomatologiczne-oil-2025"
+  },
+  {
+    "name": "XI Andrzejki Stomatologiczne",
+    "date": "28-30 listopada 2025",
+    "city": "Wisła",
+    "specialty": "Stomatologia ogólna",
+    "slugs": ["stomatologia"],
+    "organizer": "Okręgowa Izba Lekarska w Katowicach",
+    "url": "https://nil.org.pl/dla-lekarzy/dla-stomatologow/8749-wydarzenia-stomatologiczne-oil-2025"
+  },
+  {
+    "name": "Konferencja Naukowo-Szkoleniowa OIL Kraków – Jesień 2025",
+    "date": "24-26 października 2025",
+    "city": "Rytro",
+    "specialty": "Stomatologia ogólna",
+    "slugs": ["stomatologia"],
+    "organizer": "Okręgowa Izba Lekarska w Krakowie",
+    "url": "https://nil.org.pl/dla-lekarzy/dla-stomatologow/8749-wydarzenia-stomatologiczne-oil-2025"
+  },
+  {
+    "name": "DentalTutor Conference 2026",
+    "date": "7 marca 2026",
+    "city": "Bydgoszcz",
+    "specialty": "Stomatologia, Endodoncja, Protetyka",
+    "slugs": ["stomatologia", "endodoncja", "protetyka"],
+    "organizer": "DentalTutor",
+    "url": "https://dentaltutor.pl/konferencja-2026/"
+  },
+  {
+    "name": "32. Targi Stomatologiczne KRAKDENT 2026",
+    "date": "16-18 kwietnia 2026",
+    "city": "Kraków (EXPO Kraków)",
+    "specialty": "Stomatologia ogólna",
+    "slugs": ["stomatologia"],
+    "organizer": "Targi w Krakowie / PTS",
+    "url": "https://krakdent.pl/"
+  },
+  {
+    "name": "DENTOPOLIS 2026 – Festiwal Stomatologii Praktycznej",
+    "date": "15-17 maja 2026",
+    "city": "Kielce",
+    "specialty": "Stomatologia, Periodontologia, Endodoncja, Protetyka",
+    "slugs": ["stomatologia", "periodontologia", "endodoncja", "protetyka"],
+    "organizer": "Wydawnictwo Kwintesencja",
+    "url": "https://kwintesencja.com.pl/konferencje/dentopolis-2026"
+  },
+  {
+    "name": "Asysdent 2026 – XIII Konferencja dla Higienistek i Asystentek",
+    "date": "16-17 maja 2026",
+    "city": "Łódź",
+    "specialty": "Stomatologia ogólna",
+    "slugs": ["stomatologia"],
+    "organizer": "Bestom Dentonet.pl",
+    "url": "https://www.asysdent.pl/"
+  },
+  {
+    "name": "5th International Congress PTSL",
+    "date": "29-31 maja 2026",
+    "city": "Wrocław",
+    "specialty": "Stomatologia laserowa, Implantologia",
+    "slugs": ["stomatologia", "implantologia"],
+    "organizer": "Polskie Towarzystwo Stomatologii Laserowej",
+    "url": "https://ptsl.com.pl/event/5th-international-congress-for-ptsl/"
+  },
+  {
+    "name": "33. CEDE – Central European Dental Exhibition 2026",
+    "date": "11-13 czerwca 2026",
+    "city": "Poznań (MTP Expo)",
+    "specialty": "Stomatologia, Protetyka",
+    "slugs": ["stomatologia", "protetyka"],
+    "organizer": "Organizatorzy CEDE / PTProtet",
+    "url": "https://www.cede.pl/"
+  },
+  {
+    "name": "X Mazowieckie Spotkania Stomatologiczne 2026",
+    "date": "19-21 czerwca 2026",
+    "city": "Serock",
+    "specialty": "Stomatologia, Implantologia, Ortodoncja, Periodontologia",
+    "slugs": ["stomatologia", "implantologia", "ortodoncja", "periodontologia"],
+    "organizer": "Okręgowa Izba Lekarska w Warszawie",
+    "url": "https://izba-lekarska.pl/doskonalenie-zawodowe/szkolenia-i-konferencje/konferencje-dla-lekarzy-dentystow/mss-2026-dla-lekarzy.html"
+  },
+  {
+    "name": "XXII Konferencja PASE 2026 – Stomatologia Estetyczna",
+    "date": "12-13 czerwca 2026",
+    "city": "Sopot",
+    "specialty": "Stomatologia estetyczna",
+    "slugs": ["stomatologia-estetyczna"],
+    "organizer": "PASE",
+    "url": "https://pase.org.pl/"
+  },
+  {
+    "name": "Digital Workflow Concept 26 – Kongres Implantologiczno-Protetyczny",
+    "date": "17-19 września 2026",
+    "city": "Józefów k. Warszawy",
+    "specialty": "Implantologia, Protetyka",
+    "slugs": ["implantologia", "protetyka"],
+    "organizer": "Denon Dental",
+    "url": "https://kongres.dental.pl/program-kongresu"
+  },
+  {
+    "name": "Master Class on Tour 2026",
+    "date": "6-7 listopada 2026",
+    "city": "Warszawa",
+    "specialty": "Implantologia",
+    "slugs": ["implantologia"],
+    "organizer": "Polskie Stowarzyszenie Implantologiczne (PSI)",
+    "url": "https://psi-icoi.pl/kongresy"
+  },
+  {
+    "name": "26. Zjazd Polskiego Towarzystwa Ortodontycznego",
+    "date": "23-26 września 2026",
+    "city": "Warszawa (Hilton Warsaw City)",
+    "specialty": "Ortodoncja",
+    "slugs": ["ortodoncja"],
+    "organizer": "Polskie Towarzystwo Ortodontyczne",
+    "url": "https://zjazdpto.pl/pl/"
+  },
+  {
+    "name": "World Congress on Dental Traumatology WCDT 2026",
+    "date": "3-5 września 2026",
+    "city": "Warszawa",
+    "specialty": "Stomatologia ogólna",
+    "slugs": ["stomatologia"],
+    "organizer": "Polskie Towarzystwo Stomatologiczne",
+    "url": "https://pts.net.pl/"
+  },
+  {
+    "name": "XVII Zjazd PTDNŻ – Dysfunkcje Narządu Żucia",
+    "date": "15-17 października 2026",
+    "city": "Brzask (Pałac Getz)",
+    "specialty": "Dysfunkcje narządu żucia, Okluzja",
+    "slugs": ["stomatologia"],
+    "organizer": "Polskie Towarzystwo Dysfunkcji Narządu Żucia",
+    "url": "https://dysfunkcje.pl/"
+  },
+  {
+    "name": "Debata Mistrzów Steigman & Zucchelli",
+    "date": "10-13 grudnia 2026",
+    "city": "Sopot",
+    "specialty": "Implantologia, Periodontologia",
+    "slugs": ["implantologia", "periodontologia"],
+    "organizer": "Polskie Stowarzyszenie Implantologiczne (PSI)",
+    "url": "https://psi-icoi.pl/kongresy"
+  }
+]

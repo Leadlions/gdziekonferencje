@@ -1,0 +1,147 @@
+﻿---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SpecializationCard from '../components/SpecializationCard.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+
+const blogPosts = (await getCollection('blog'))
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  .slice(0, 3);
+
+const SPECIALIZATIONS = [
+  { title: 'Stomatologia', description: 'Konferencje ogólnostomatologiczne - fundament dla każdego dentysty.', href: '/konferencje/stomatologia/', icon: '🦷' },
+  { title: 'Implantologia', description: 'Systemy implantologiczne, chirurgia, protokoły obciążenia.', href: '/konferencje/implantologia/', icon: '🔩' },
+  { title: 'Protetyka', description: 'CAD/CAM, cyrkonia, protezy stałe i ruchome na implantach.', href: '/konferencje/protetyka/', icon: '🦴' },
+  { title: 'Stomatologia estetyczna', description: 'Licówki, wybielanie, Digital Smile Design.', href: '/konferencje/stomatologia-estetyczna/', icon: '✨' },
+  { title: 'Ortodoncja', description: 'Aparaty stałe, alignery, cyfrowe planowanie leczenia.', href: '/konferencje/ortodoncja/', icon: '📐' },
+  { title: 'Chirurgia stomatologiczna', description: 'Ekstrakcje złożone, augmentacje, chirurgia szczękowo-twarzowa.', href: '/konferencje/chirurgia-stomatologiczna/', icon: '⚕️' },
+  { title: 'Periodontologia', description: 'Leczenie chorób przyzębia, terapia implantów.', href: '/konferencje/periodontologia/', icon: '🔬' },
+  { title: 'Endodoncja', description: 'Leczenie kanałowe pod mikroskopem, techniki NiTi.', href: '/konferencje/endodoncja/', icon: '🔭' },
+  { title: 'Stomatologia dziecięca', description: 'Pedodoncja, profilaktyka, leczenie najmłodszych pacjentów.', href: '/konferencje/stomatologia-dziecieca/', icon: '🧒' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'gdzie-konferencje.pl',
+  url: 'https://gdzie-konferencje.pl/',
+  description: 'Portal konferencji medycznych w Polsce',
+  inLanguage: 'pl',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://gdzie-konferencje.pl/konferencje/{search_term_string}/',
+    'query-input': 'required name=search_term_string',
+  },
+};
+---
+
+<Base
+  title="Konferencje medyczne w Polsce - gdzie-konferencje.pl"
+  description="Znajdź konferencje, kursy i sympozja medyczne w Polsce. Jeden portal, wszystkie terminy. Stomatologia, implantologia, protetyka, ortodoncja i wiecej specjalizacji."
+  jsonLd={jsonLd}
+>
+  <!-- HERO -->
+  <section class="bg-gradient-to-b from-brand-50 to-white px-4 py-16 sm:px-6 sm:py-24">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="mb-4 text-sm font-semibold uppercase tracking-widest text-brand-600">Portal konferencji</p>
+      <h1 class="text-4xl font-bold leading-tight text-slate-900 sm:text-5xl">
+        Konferencje medyczne<br class="hidden sm:block" /> w Polsce
+      </h1>
+      <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
+        Jeden portal, wszystkie terminy. Znajdź konferencje, kursy i sympozja
+        dopasowane do Twojej specjalizacji i zdobywaj punkty edukacyjne NIL.
+      </p>
+      <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <a
+          href="#specjalizacje"
+          class="w-full rounded-lg bg-brand-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-800 sm:w-auto"
+        >
+          Przeglądaj konferencje
+        </a>
+        <a
+          href="#dodaj-konferencje"
+          class="w-full rounded-lg border border-brand-300 px-6 py-3 font-semibold text-brand-700 transition-colors hover:bg-brand-50 sm:w-auto"
+        >
+          Dodaj konferencję
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="border-y border-slate-100 bg-slate-50 px-4 py-10 sm:px-6">
+    <div class="mx-auto grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-3">
+      {[
+        { step: '01', title: 'Znajdź konferencję', desc: 'Przeglądaj według specjalizacji, miasta i daty.' },
+        { step: '02', title: 'Zapisz się u organizatora', desc: 'Link prowadzi bezpośrednio do strony rejestracji.' },
+        { step: '03', title: 'Zbieraj punkty edukacyjne', desc: 'Śledź konferencje akredytowane przez NIL.' },
+      ].map(({ step, title, desc }) => (
+        <div class="flex items-start gap-4">
+          <span class="shrink-0 text-2xl font-bold text-brand-200">{step}</span>
+          <div>
+            <p class="font-semibold text-slate-800">{title}</p>
+            <p class="mt-1 text-sm text-slate-500">{desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- SPECIALIZATIONS -->
+  <section id="specjalizacje" class="px-4 py-16 sm:px-6">
+    <div class="mx-auto max-w-6xl">
+      <h2 class="text-2xl font-bold text-slate-900">Konferencje według specjalizacji</h2>
+      <p class="mt-2 text-slate-500">Wybierz dziedzinę, aby zobaczyć artykuł i nadchodzące konferencje.</p>
+      <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {SPECIALIZATIONS.map(s => (
+          <SpecializationCard {...s} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  {blogPosts.length > 0 && (
+    <section class="bg-slate-50 px-4 py-16 sm:px-6">
+      <div class="mx-auto max-w-6xl">
+        <div class="flex items-end justify-between">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">Blog ekspercki</h2>
+            <p class="mt-1 text-slate-500">Praktyczna wiedza dla dentystów i techników.</p>
+          </div>
+          <a href="/blog/" class="text-sm font-medium text-brand-600 hover:text-brand-800">
+            Wszystkie wpisy &rarr;
+          </a>
+        </div>
+        <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {blogPosts.map(post => (
+            <BlogPostCard
+              title={post.data.title}
+              description={post.data.description}
+              publishedAt={post.data.publishedAt}
+              tags={post.data.tags}
+              href={`/blog/${post.slug}/`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA ORGANIZERS -->
+  <section id="dodaj-konferencje" class="px-4 py-16 sm:px-6">
+    <div class="mx-auto max-w-3xl rounded-2xl bg-brand-800 px-8 py-12 text-center text-white">
+      <h2 class="text-2xl font-bold">Organizujesz konferencję medyczną?</h2>
+      <p class="mx-auto mt-3 max-w-lg text-brand-100">
+        Dodaj swoje wydarzenie bezpłatnie. Dotrzyj do tysięcy lekarzy, techników
+        i firm z branży medycznej.
+      </p>
+      <a
+        href="mailto:kontakt@gdzie-konferencje.pl"
+        class="mt-6 inline-block rounded-lg bg-white px-6 py-3 font-semibold text-brand-800 transition-colors hover:bg-brand-50"
+      >
+        Napisz do nas
+      </a>
+    </div>
+  </section>
+</Base>

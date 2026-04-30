@@ -1,0 +1,118 @@
+---
+import { getCollection } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+import ConferenceCard from '../../components/ConferenceCard.astro';
+import allConferences from '../../data/conferences.json';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('specjalizacje');
+  return entries.map(entry => ({
+    params: { specjalizacja: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const CITIES = [
+  { name: 'Warszawa', slug: 'warszawa' },
+  { name: 'Kraków', slug: 'krakow' },
+  { name: 'Gdańsk', slug: 'gdansk' },
+  { name: 'Wrocław', slug: 'wroclaw' },
+  { name: 'Poznań', slug: 'poznan' },
+  { name: 'Łódź', slug: 'lodz' },
+];
+
+const conferences = allConferences.filter(c => c.slugs.includes(entry.slug));
+
+const canonicalUrl = `https://gdzie-konferencje.pl/konferencje/${entry.slug}/`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  name: entry.data.title,
+  description: entry.data.description,
+  url: canonicalUrl,
+  inLanguage: 'pl',
+  datePublished: entry.data.publishedAt.toISOString().split('T')[0],
+  ...(entry.data.updatedAt && {
+    dateModified: entry.data.updatedAt.toISOString().split('T')[0],
+  }),
+};
+
+const breadcrumbs = [
+  { name: 'Konferencje', url: 'https://gdzie-konferencje.pl/konferencje/' },
+  { name: entry.data.displayName, url: canonicalUrl },
+];
+---
+
+<Article
+  title={entry.data.title}
+  description={entry.data.description}
+  breadcrumbs={breadcrumbs}
+  jsonLd={jsonLd}
+>
+  <nav class="mb-6 text-sm text-slate-500" aria-label="Breadcrumb">
+    <ol class="flex flex-wrap items-center gap-1.5">
+      <li><a href="/" class="hover:text-brand-700">Strona główna</a></li>
+      <li class="text-slate-300">/</li>
+      <li><a href="/konferencje/" class="hover:text-brand-700">Konferencje</a></li>
+      <li class="text-slate-300">/</li>
+      <li class="font-medium text-slate-800" aria-current="page">{entry.data.displayName}</li>
+    </ol>
+  </nav>
+
+  <div class="prose prose-slate max-w-none prose-headings:font-bold prose-a:text-brand-700 prose-a:no-underline hover:prose-a:underline">
+    <Content />
+  </div>
+
+  <!-- CONFERENCE LISTING -->
+  <section class="mt-12">
+    <h2 class="text-xl font-bold text-slate-900">
+      Nadchodzące konferencje: {entry.data.displayName}
+    </h2>
+
+    {conferences.length > 0 ? (
+      <div class="mt-4 flex flex-col gap-3">
+        {conferences.map(c => (
+          <ConferenceCard
+            name={c.name}
+            date={c.date}
+            city={c.city}
+            specialty={c.specialty}
+            organizer={c.organizer}
+            url={c.url}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="mt-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 px-6 py-10 text-center">
+        <p class="text-sm font-medium text-slate-500">Zbieramy dane od organizatorów</p>
+        <a
+          href="mailto:kontakt@gdzie-konferencje.pl"
+          class="mt-4 inline-block rounded-md bg-brand-700 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-800"
+        >
+          Dodaj konferencję
+        </a>
+      </div>
+    )}
+  </section>
+
+  <!-- LOCAL SEO CITY LINKS -->
+  <section class="mt-12">
+    <h2 class="text-lg font-bold text-slate-900">
+      Konferencje {entry.data.displayName.toLowerCase()} według miasta
+    </h2>
+    <div class="mt-4 flex flex-wrap gap-2">
+      {CITIES.map(city => (
+        <a
+          href={`/konferencje/${entry.slug}/${city.slug}/`}
+          class="rounded-full border border-slate-200 px-4 py-1.5 text-sm text-slate-600 transition-colors hover:border-brand-300 hover:text-brand-700"
+        >
+          {entry.data.displayName}, {city.name}
+        </a>
+      ))}
+    </div>
+  </section>
+</Article>

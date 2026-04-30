@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const canonicalUrl = `https://gdzie-konferencje.pl/blog/${post.slug}/`;
+
+const dateStr = post.data.publishedAt.toLocaleDateString('pl-PL', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  url: canonicalUrl,
+  datePublished: post.data.publishedAt.toISOString().split('T')[0],
+  ...(post.data.updatedAt && {
+    dateModified: post.data.updatedAt.toISOString().split('T')[0],
+  }),
+  author: {
+    '@type': 'Organization',
+    name: 'gdzie-konferencje.pl',
+    url: 'https://gdzie-konferencje.pl/',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'gdzie-konferencje.pl',
+    url: 'https://gdzie-konferencje.pl/',
+  },
+};
+
+const breadcrumbs = [
+  { name: 'Blog', url: 'https://gdzie-konferencje.pl/blog/' },
+  { name: post.data.title, url: canonicalUrl },
+];
+---
+
+<Article
+  title={`${post.data.title} | gdzie-konferencje.pl`}
+  description={post.data.description}
+  breadcrumbs={breadcrumbs}
+  jsonLd={jsonLd}
+>
+  <nav class="mb-6 text-sm text-slate-500">
+    <ol class="flex flex-wrap items-center gap-1.5">
+      <li><a href="/" class="hover:text-brand-700">Strona główna</a></li>
+      <li class="text-slate-300">/</li>
+      <li><a href="/blog/" class="hover:text-brand-700">Blog</a></li>
+      <li class="text-slate-300">/</li>
+      <li class="font-medium text-slate-800" aria-current="page">{post.data.title}</li>
+    </ol>
+  </nav>
+
+  {post.data.tags && post.data.tags.length > 0 && (
+    <div class="mb-4 flex flex-wrap gap-1.5">
+      {post.data.tags.map(tag => (
+        <span class="rounded-full bg-brand-100 px-2.5 py-0.5 text-xs font-medium text-brand-800">{tag}</span>
+      ))}
+    </div>
+  )}
+
+  <div class="mb-6 text-xs text-slate-400">
+    {post.data.author} &middot; {dateStr}
+  </div>
+
+  <div class="prose prose-slate max-w-none prose-headings:font-bold prose-a:text-brand-700 prose-a:no-underline hover:prose-a:underline">
+    <Content />
+  </div>
+
+  <div class="mt-12 border-t border-slate-200 pt-8">
+    <a href="/blog/" class="text-sm font-medium text-brand-600 hover:text-brand-800">
+      &larr; Wszystkie artykuły
+    </a>
+  </div>
+</Article>

@@ -1,0 +1,156 @@
+---
+import '../styles/global.css';
+
+interface Breadcrumb {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  og?: { title?: string; description?: string; type?: string };
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  breadcrumbs?: Breadcrumb[];
+}
+
+const {
+  title,
+  description,
+  canonical = Astro.url.href,
+  og = {},
+  jsonLd,
+  breadcrumbs,
+} = Astro.props;
+
+const siteName = 'gdzie-konferencje.pl';
+const ogTitle = og.title ?? title;
+const ogDescription = og.description ?? description;
+const ogType = og.type ?? 'website';
+
+const breadcrumbSchema = breadcrumbs?.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Strona główna', item: 'https://gdzie-konferencje.pl/' },
+        ...breadcrumbs.map((b, i) => ({
+          '@type': 'ListItem',
+          position: i + 2,
+          name: b.name,
+          item: b.url,
+        })),
+      ],
+    }
+  : null;
+
+const allSchemas = [
+  ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
+  ...(breadcrumbSchema ? [breadcrumbSchema] : []),
+];
+---
+
+<!doctype html>
+<html lang="pl" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {allSchemas.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify(allSchemas)} />
+    )}
+  </head>
+  <body class="bg-white text-slate-800 antialiased">
+    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+        <a href="/" class="flex items-center gap-2 text-lg font-bold text-brand-800">
+          <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="6" fill="#075985"/>
+            <rect x="13" y="5" width="6" height="11" rx="3" fill="white"/>
+            <path d="M9 14 Q9 21 16 21 Q23 21 23 14" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <line x1="16" y1="21" x2="16" y2="26" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="11" y1="26" x2="21" y2="26" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          gdzie-konferencje.pl
+        </a>
+        <nav class="hidden gap-6 text-sm font-medium text-slate-600 sm:flex">
+          <a href="/konferencje/stomatologia/" class="transition-colors hover:text-brand-700">Stomatologia</a>
+          <a href="/konferencje/implantologia/" class="transition-colors hover:text-brand-700">Implantologia</a>
+          <a href="/konferencje/ortodoncja/" class="transition-colors hover:text-brand-700">Ortodoncja</a>
+          <a href="/blog/" class="transition-colors hover:text-brand-700">Blog</a>
+        </nav>
+        <a
+          href="/#dodaj-konferencje"
+          class="hidden rounded-md bg-brand-700 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-800 sm:block"
+        >
+          Dodaj konferencję
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="mt-16 border-t border-slate-200 bg-slate-50">
+      <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+        <div class="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <div>
+            <p class="text-sm font-semibold text-slate-800">Specjalizacje</p>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+              <li><a href="/konferencje/stomatologia/" class="hover:text-brand-700">Stomatologia</a></li>
+              <li><a href="/konferencje/implantologia/" class="hover:text-brand-700">Implantologia</a></li>
+              <li><a href="/konferencje/protetyka/" class="hover:text-brand-700">Protetyka</a></li>
+              <li><a href="/konferencje/stomatologia-estetyczna/" class="hover:text-brand-700">Stomatologia estetyczna</a></li>
+              <li><a href="/konferencje/ortodoncja/" class="hover:text-brand-700">Ortodoncja</a></li>
+              <li><a href="/konferencje/chirurgia-stomatologiczna/" class="hover:text-brand-700">Chirurgia stomatologiczna</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-slate-800">Miasta</p>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+              <li><a href="/konferencje/stomatologia/warszawa/" class="hover:text-brand-700">Warszawa</a></li>
+              <li><a href="/konferencje/stomatologia/krakow/" class="hover:text-brand-700">Kraków</a></li>
+              <li><a href="/konferencje/stomatologia/gdansk/" class="hover:text-brand-700">Gdańsk</a></li>
+              <li><a href="/konferencje/stomatologia/wroclaw/" class="hover:text-brand-700">Wrocław</a></li>
+              <li><a href="/konferencje/stomatologia/poznan/" class="hover:text-brand-700">Poznań</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-slate-800">Dla kogo</p>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+              <li><a href="/dla-dentystow/" class="hover:text-brand-700">Dla dentystów</a></li>
+              <li><a href="/dla-technikow-dentystycznych/" class="hover:text-brand-700">Dla techników</a></li>
+              <li><a href="/dla-producentow-sprzetu/" class="hover:text-brand-700">Dla producentów</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-slate-800">Portal</p>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+              <li><a href="/blog/" class="hover:text-brand-700">Blog</a></li>
+              <li><a href="/#dodaj-konferencje" class="hover:text-brand-700">Dodaj konferencję</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-8 border-t border-slate-200 pt-6 text-center text-xs text-slate-400">
+          &copy; {new Date().getFullYear()} gdzie-konferencje.pl &mdash; Wszelkie prawa zastrzeżone
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

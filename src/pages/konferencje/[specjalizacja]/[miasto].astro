@@ -1,0 +1,174 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import ConferenceCard from '../../../components/ConferenceCard.astro';
+import allConferences from '../../../data/conferences.json';
+
+const CITIES: Record<string, { name: string; where: string }> = {
+  warszawa:  { name: 'Warszawa',  where: 'w Warszawie' },
+  krakow:    { name: 'Kraków',    where: 'w Krakowie' },
+  gdansk:    { name: 'Gdańsk',    where: 'w Gdańsku' },
+  wroclaw:   { name: 'Wrocław',   where: 'we Wrocławiu' },
+  poznan:    { name: 'Poznań',    where: 'w Poznaniu' },
+  lodz:      { name: 'Łódź',      where: 'w Łodzi' },
+};
+
+export async function getStaticPaths() {
+  const entries = await getCollection('specjalizacje');
+  const cityKeys = ['warszawa', 'krakow', 'gdansk', 'wroclaw', 'poznan', 'lodz'];
+
+  return entries.flatMap(entry =>
+    cityKeys.map(miasto => ({
+      params: { specjalizacja: entry.slug, miasto },
+      props: { entry, miasto },
+    }))
+  );
+}
+
+const { entry, miasto } = Astro.props;
+const city = CITIES[miasto];
+
+const specName = entry.data.displayName;
+const cityWhere = city.where;
+const cityName = city.name;
+
+const title = `Konferencje ${specName.toLowerCase()} ${cityWhere} - gdzie-konferencje.pl`;
+const description = `Konferencje, kursy i szkolenia z zakresu ${specName.toLowerCase()} ${cityWhere}. Znajdź aktualne terminy, organizatorów i punkty edukacyjne NIL.`;
+
+const canonicalUrl = `https://gdzie-konferencje.pl/konferencje/${entry.slug}/${miasto}/`;
+
+// Filter by specialty slug (city filter will be added when we have city data)
+const conferencesInSpec = allConferences.filter(c => c.slugs.includes(entry.slug));
+// Simple city match (case-insensitive partial)
+const conferencesInCity = conferencesInSpec.filter(c =>
+  c.city.toLowerCase().includes(cityName.toLowerCase().slice(0, 4))
+);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  name: title,
+  description,
+  url: canonicalUrl,
+  inLanguage: 'pl',
+};
+
+const breadcrumbs = [
+  { name: 'Konferencje', url: 'https://gdzie-konferencje.pl/konferencje/' },
+  { name: specName, url: `https://gdzie-konferencje.pl/konferencje/${entry.slug}/` },
+  { name: cityName, url: canonicalUrl },
+];
+
+const otherCities = Object.entries(CITIES).filter(([slug]) => slug !== miasto);
+---
+
+<Base title={title} description={description} breadcrumbs={breadcrumbs} jsonLd={jsonLd}>
+  <div class="mx-auto max-w-4xl px-4 py-10 sm:px-6">
+
+    <!-- BREADCRUMBS -->
+    <nav class="mb-6 text-sm text-slate-500">
+      <ol class="flex flex-wrap items-center gap-1.5">
+        <li><a href="/" class="hover:text-brand-700">Strona główna</a></li>
+        <li class="text-slate-300">/</li>
+        <li><a href="/konferencje/" class="hover:text-brand-700">Konferencje</a></li>
+        <li class="text-slate-300">/</li>
+        <li><a href={`/konferencje/${entry.slug}/`} class="hover:text-brand-700">{specName}</a></li>
+        <li class="text-slate-300">/</li>
+        <li class="font-medium text-slate-800" aria-current="page">{cityName}</li>
+      </ol>
+    </nav>
+
+    <!-- HERO -->
+    <h1 class="text-3xl font-bold text-slate-900 sm:text-4xl">
+      Konferencje {specName.toLowerCase()} {cityWhere}
+    </h1>
+    <p class="mt-3 text-lg text-slate-600">
+      Znajdź konferencje, kursy i szkolenia z zakresu {specName.toLowerCase()} organizowane
+      {cityWhere} i w okolicach. Sprawdz aktualne terminy i zapisz sie bezposrednio u organizatora.
+    </p>
+
+    <!-- CONFERENCE LISTING -->
+    <section class="mt-10">
+      {conferencesInCity.length > 0 ? (
+        <div class="flex flex-col gap-3">
+          {conferencesInCity.map(c => (
+            <ConferenceCard
+              name={c.name}
+              date={c.date}
+              city={c.city}
+              specialty={c.specialty}
+              organizer={c.organizer}
+              url={c.url}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="rounded-xl border border-dashed border-slate-300 bg-slate-50 px-6 py-12 text-center">
+          <p class="font-medium text-slate-600">
+            Aktualnie brak zaplanowanych konferencji {specName.toLowerCase()} {cityWhere}.
+          </p>
+          <p class="mt-2 text-sm text-slate-400">
+            Sprawdz ogolnopolski kalendarz lub dodaj swoje wydarzenie.
+          </p>
+          <div class="mt-6 flex flex-wrap justify-center gap-3">
+            <a
+              href={`/konferencje/${entry.slug}/`}
+              class="rounded-md border border-brand-300 px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50"
+            >
+              Wszystkie konferencje {specName.toLowerCase()}
+            </a>
+            <a
+              href="mailto:kontakt@gdzie-konferencje.pl"
+              class="rounded-md bg-brand-700 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-800"
+            >
+              Dodaj konferencje
+            </a>
+          </div>
+        </div>
+      )}
+    </section>
+
+    <!-- INFORMATIONAL TEXT (SEO) -->
+    <section class="mt-12 rounded-xl border border-slate-100 bg-slate-50 p-6">
+      <h2 class="text-lg font-bold text-slate-800">
+        {specName} {cityWhere} - informacje
+      </h2>
+      <p class="mt-3 text-sm leading-relaxed text-slate-600">
+        {cityName} to jedno z glownych centrow konferencyjnych w Polsce. Sala konferencyjne,
+        hotele i dobre polaczenia komunikacyjne sprawiaja, ze wiele towarzystw naukowych
+        i organizatorow branżowych wybiera {cityName} jako miejsce swoich kongresow i kursow.
+        Konferencje z zakresu {specName.toLowerCase()} odbywaja sie tu regularnie - zarowno
+        duze kongresy ogolnopolskie, jak i kameralne warsztaty dla malych grup.
+      </p>
+      <p class="mt-3 text-sm leading-relaxed text-slate-600">
+        Sledzac kalendarze Polskiego Towarzystwa Stomatologicznego i izb lekarskich,
+        mozna planowac uczestnictwo z wyprzedzeniem i korzystac z nizszych cen early bird.
+        Portal gdzie-konferencje.pl agreguje te informacje w jednym miejscu.
+      </p>
+    </section>
+
+    <!-- OTHER CITIES -->
+    <section class="mt-10">
+      <h2 class="text-base font-semibold text-slate-700">
+        Konferencje {specName.toLowerCase()} w innych miastach
+      </h2>
+      <div class="mt-3 flex flex-wrap gap-2">
+        {otherCities.map(([slug, c]) => (
+          <a
+            href={`/konferencje/${entry.slug}/${slug}/`}
+            class="rounded-full border border-slate-200 px-4 py-1.5 text-sm text-slate-600 transition-colors hover:border-brand-300 hover:text-brand-700"
+          >
+            {specName}, {c.name}
+          </a>
+        ))}
+        <a
+          href={`/konferencje/${entry.slug}/`}
+          class="rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5 text-sm font-medium text-brand-700 hover:bg-brand-100"
+        >
+          Cala Polska
+        </a>
+      </div>
+    </section>
+
+  </div>
+</Base>
