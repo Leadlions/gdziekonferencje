@@ -19,98 +19,85 @@ import anthropic
 # Skrypt wybiera kolejna nieobslugiwana fraze z tej listy
 # ---------------------------------------------------------------------------
 TARGET_KEYWORDS = [
+    # --- Kongresy, targi, zjazdy ---
     "konferencje stomatologiczne 2025",
     "kursy dla dentystow Polska",
     "szkolenia stomatologiczne online",
     "punkty edukacyjne NIL dentysta",
     "kongres implantologiczny Polska",
-    "kurs endodoncji z mikroskopem",
-    "szkolenia periodontologiczne Polska",
     "konferencje ortodontyczne 2025 2026",
-    "kurs chirurgii implantologicznej",
-    "stomatologia estetyczna szkolenia",
-    "alignery kurs kliniczny",
-    "licowki ceramiczne szkolenie",
-    "cyfrowa stomatologia CAD CAM kurs",
-    "CBCT stomatologia kurs interpretacji",
-    "sedacja wziewna kurs certyfikat",
-    "protetyka na implantach szkolenie",
     "konferencje dla technikow dentystycznych",
-    "Digital Smile Design kurs Polska",
-    "wybielanie zebow szkolenie",
-    "leczenie endodontyczne retreatment kurs",
-    "pedodoncja szkolenia dla dentystow",
     "konferencja periodontologiczna Polska",
-    "regeneracja kosci szkolenie GBR",
-    "sinus lift kurs chirurgiczny",
-    "okluzja i protezy szkolenia",
-    "ortodoncja dorosli kurs kliniczny",
-    "mikrobiom jamy ustnej konferencja",
-    "profilaktyka prochnicy kurs dla dentystow",
-    "zarządzanie gabinetem stomatologicznym szkolenie",
-    "komunikacja z pacjentem stomatologia kurs",
-    # --- kolejne 30 fraz ---
     "konferencje stomatologiczne Warszawa",
     "konferencje stomatologiczne Krakow",
     "CEDE targi stomatologiczne Poznan",
     "KRAKDENT kongres stomatologiczny",
-    "kurs augmentacji kosci dentysta",
-    "implanty natychmiastowe protokol kliniczny",
-    "All-on-4 All-on-6 kurs implantologia",
-    "chirurgia plastyczna dziasel kurs",
-    "recesje dziasel leczenie szkolenie",
-    "periimplantitis leczenie konferencja",
-    "planowanie implantow CBCT tomografia",
-    "robotyka cyfrowa stomatologia konferencja",
-    "sztuczna inteligencja AI stomatologia szkolenie",
-    "szablony chirurgiczne druk 3D implantologia",
-    "skaner wewnatrzustny wycisk cyfrowy kurs",
-    "ceramika cyrkonowa zirconia szkolenie",
-    "kompozyt bezposredni kurs kliniczny",
-    "techniki klejenia bonding szkolenie stomatologia",
-    "sedacja podtlenkiem azotu dzieci kurs",
-    "stomatologia biologiczna holistyczna konferencja",
-    "bruksizm zgrzytanie zebami leczenie kurs",
-    "aparat ortodontyczny Damon szkolenie",
-    "Invisalign kurs kliniczny Polska",
-    "retencja ortodontyczna szkolenie dentysta",
-    "estetyka usmiechu planowanie szkolenie",
-    "fotografia stomatologiczna kurs podstawy",
-    "marketing gabinetu stomatologicznego szkolenie",
-    "prawo medyczne dla dentystow kurs",
-    "dokumentacja medyczna gabinet stomatologiczny",
-    "wypalenie zawodowe dentysta wellbeing konferencja",
-    # --- kolejne 30 fraz ---
     "konferencje stomatologiczne Gdansk Trojmiasto",
     "konferencje stomatologiczne Wroclaw",
     "konferencje stomatologiczne Poznan",
     "konferencja stomatologiczna Lodz",
     "zjazd polskiego towarzystwa stomatologicznego",
     "kongres PTS stomatologia Polska",
+    # --- Szkolenia i kursy (tematyczne - BEZ protokolow klinicznych) ---
+    "szkolenia periodontologiczne Polska",
+    "kurs endodoncji z mikroskopem",
+    "kurs chirurgii implantologicznej",
+    "stomatologia estetyczna szkolenia",
+    "licowki ceramiczne szkolenie",
+    "cyfrowa stomatologia CAD CAM kurs",
+    "CBCT stomatologia kurs interpretacji",
+    "protetyka na implantach szkolenie",
+    "Digital Smile Design kurs Polska",
+    "pedodoncja szkolenia dla dentystow",
+    "mikrobiom jamy ustnej konferencja",
+    "planowanie implantow CBCT tomografia",
+    "robotyka cyfrowa stomatologia konferencja",
+    "sztuczna inteligencja AI stomatologia szkolenie",
+    "szablony chirurgiczne druk 3D implantologia",
+    "skaner wewnatrzustny wycisk cyfrowy kurs",
+    "ceramika cyrkonowa zirconia szkolenie",
+    "stomatologia biologiczna holistyczna konferencja",
+    "aparat ortodontyczny Damon szkolenie",
+    "Invisalign szkolenia Polska",
+    "estetyka usmiechu planowanie szkolenie",
+    "fotografia stomatologiczna kurs podstawy",
     "kurs endodoncji rotacyjne NiTi systemy",
-    "WaveOne Reciproc ProTaper szkolenie kurs",
-    "obturacja termoplastyczna kurs endodoncja",
     "mikroskop operacyjny ergonomia kurs",
-    "leczenie kanalowe zeba mlecznego kurs",
-    "pulpotomia zab mleczny szkolenie pedodoncja",
-    "lakowanie zebow profilaktyka kurs dentysta",
-    "fluorkowanie profilaktyka prochnica szkolenie",
-    "osteoresorpcja implanty biologia szkolenie",
+    "ceramika IPS emax szkolenie technik dentysta",
+    "All-on-4 All-on-6 szkolenia implantologia",
+    "augmentacja kosci kurs implantologia",
+    "chirurgia plastyczna dziasel kurs",
+    "periimplantitis konferencja szkolenie",
+    "regeneracja kosci szkolenie GBR",
     "platelet rich fibrin PRF kurs implantologia",
     "protezy calkowite bezzebna szeka kurs",
     "overdenture protezy na implantach kurs",
-    "most na implantach protetyka kurs kliniczny",
-    "ceramika IPS emax szkolenie technik dentysta",
+    "protetyka most na implantach kurs",
     "kurs gipsowania artykulatora okluzja",
-    "rejestracja relacji zebrowej kurs protetyka",
     "leczenie wad szkieletowych ortodoncja chirurgia",
-    "ekspansja luku ortodontia kurs dzieci",
     "myofunkcjonalna terapia ortodoncja szkolenie",
-    "hipnoza dentysta leczenie leku kurs",
-    "komunikacja trudny pacjent stomatologia kurs",
-    "praca pod lupami powiekszenie stomatologia",
-    "ergonomia pracy dentysta zapobieganie urazom",
+    # --- Biznes, prawo, zarzadzanie ---
+    "marketing gabinetu stomatologicznego szkolenie",
+    "prawo medyczne dla dentystow kurs",
+    "dokumentacja medyczna gabinet stomatologiczny",
+    "wypalenie zawodowe dentysta wellbeing konferencja",
+    "zarządzanie gabinetem stomatologicznym szkolenie",
+    "komunikacja z pacjentem stomatologia kurs",
     "ubezpieczenia OC dentysta odpowiedzialnosc szkolenie",
+    "ergonomia pracy dentysta zapobieganie urazom",
+    "praca pod lupami powiekszenie stomatologia",
+    "komunikacja trudny pacjent stomatologia kurs",
+    # --- Technologie i rynek ---
+    "sztuczna inteligencja AI radiologia stomatologiczna",
+    "telemedycyna stomatologia konferencja",
+    "rynek stomatologiczny Polska trendy 2025",
+    "druk 3D protetyka stomatologia szkolenie",
+    "cyfrowy workflow stomatologia integracja",
+    "ekologia gabinet stomatologiczny zrownowazone praktyki",
+    "finansowanie kursow dentystycznych dofinansowanie",
+    "akredytacja szkolenia stomatologiczne Polska",
+    "wybor kursu stomatologicznego jak ocenic jakosc",
+    "networking stomatologia konferencje korzyści",
 ]
 
 # ---------------------------------------------------------------------------
@@ -186,9 +173,9 @@ def main():
 
     existing_list = "\n".join(f"- {t}" for t in existing_titles) if existing_titles else "(brak)"
 
-    prompt = f"""Jestes ekspertem SEO i specjalista ds. stomatologii. Napisz artykul blogowy dla portalu gdzie-konferencje.pl.
+    prompt = f"""Jestes redaktorem portalu gdzie-konferencje.pl i specjalista SEO. Napisz artykul blogowy dla tego portalu.
 
-Portal agreguje konferencje, kursy i szkolenia stomatologiczne w Polsce. Czytelnicy to lekarze dentysci, technicy dentystyczni i pracownicy branzy medycznej.
+Portal agreguje konferencje, kursy i szkolenia stomatologiczne w Polsce. Czytelnicy to lekarze dentysci, technicy dentystyczni i pracownicy branzy medycznej szukajacy informacji o wydarzeniach branżowych, szkoleniach i rynku stomatologicznym.
 
 FRAZA KLUCZOWA do targetowania: "{keyword}"
 Fraza musi pojawic sie naturalnie w: tytule, opisie SEO, pierwszym akapicie i przynajmniej jednym naglowku H2.
@@ -196,14 +183,22 @@ Fraza musi pojawic sie naturalnie w: tytule, opisie SEO, pierwszym akapicie i pr
 Istniejace artykuly (NIE powtarzaj tematow):
 {existing_list}
 
+BEZWZGLEDNY ZAKAZ - tego NIE wolno pisac:
+- Zadnych protokolow klinicznych leczenia (np. "protokol leczenia choroby przyzebia")
+- Zadnych wskazan ani przeciwwskazan terapeutycznych
+- Zadnych informacji o dawkowaniu lekow, materialow, substancji
+- Zadnych porad "jak leczyc pacjenta z..."
+- Zadnych instrukcji klinicznych krok po kroku
+Artykul ma dotyczyc WYDARZEN (konferencji, kursow, szkolen), RYNKU, KARIERY, TECHNOLOGII - nie protokolow medycznych.
+
 Wymogi artykulu:
 1. Minimum 700 slow merytorycznej tresci po polsku
 2. Poprawne polskie znaki diakrytyczne (ą, ę, ó, ś, ź, ż, ć, ń, ł)
 3. BEZ myslnikow em (—) - uzywaj zwyklego (-)
 4. BEZ emoji
 5. Struktura: wstep (fraza kluczowa w 1. akapicie), 4-6 sekcji z naglowkami ##, podsumowanie
-6. Praktyczne, merytoryczne informacje - nie marketingowy jezyk
-7. Gdzie naturalne - wspominaj o konferencjach i szkoleniach w Polsce
+6. Praktyczne, merytoryczne informacje o branzy - nie marketingowy jezyk
+7. Gdzie naturalne - podawaj konkretne przykłady konferencji i szkolen w Polsce (nazwy towarzystw, miast, dat)
 
 ZASADY ANTY-AI (kluczowe - nie lazem ich):
 - NIE uzywaj zwrotow: "w dzisiejszych czasach", "warto zaznaczyc", "nalezy podkreslic", "bez watpienia", "co wiecej", "podsumowujac powyzsze", "w konkluzji"

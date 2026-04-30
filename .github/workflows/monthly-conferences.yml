@@ -5,6 +5,9 @@ on:
     - cron: '0 7 1 * *'   # 1. dnia kazdego miesiaca o 7:00 UTC
   workflow_dispatch:        # mozliwosc recznego odpalenia
 
+permissions:
+  contents: write
+
 jobs:
   scrape-conferences:
     runs-on: ubuntu-latest

@@ -5,6 +5,9 @@ on:
     - cron: '0 8 * * *'   # codziennie o 8:00 UTC (10:00 polskiego czasu)
   workflow_dispatch:        # mozliwosc recznego odpalenia z GitHub
 
+permissions:
+  contents: write
+
 jobs:
   generate-post:
     runs-on: ubuntu-latest
