@@ -227,22 +227,32 @@ Odpowiedz WYLACZNIE w formacie JSON (bez markdown code block, bez komentarzy):
 
     print("Generowanie artykulu przez Claude API...")
     response = client.messages.create(
-        model="claude-3-5-sonnet-20241022",
+        model="claude-opus-4-5",
         max_tokens=4000,
         messages=[{"role": "user", "content": prompt}],
     )
 
     raw = response.content[0].text.strip()
+    print(f"Odpowiedz Claude ({len(raw)} znakow)")
 
-    # Usun ewentualny markdown code block
-    raw = re.sub(r'^```json\s*', '', raw)
-    raw = re.sub(r'\s*```$', '', raw)
+    # Usun ewentualny markdown code block (rozne warianty)
+    raw = re.sub(r'^```json\s*', '', raw, flags=re.MULTILINE)
+    raw = re.sub(r'^```\s*', '', raw, flags=re.MULTILINE)
+    raw = re.sub(r'```\s*$', '', raw, flags=re.MULTILINE)
+    raw = raw.strip()
+
+    # Znajdz pierwszy { i ostatni } zeby wyciagnac sam JSON
+    start = raw.find('{')
+    end = raw.rfind('}')
+    if start != -1 and end != -1:
+        raw = raw[start:end+1]
 
     try:
         data = json.loads(raw)
     except json.JSONDecodeError as e:
         print(f"ERROR: Niepoprawny JSON od Claude: {e}")
-        print("Odpowiedz:", raw[:500])
+        print("Pierwsze 800 znakow odpowiedzi:")
+        print(raw[:800])
         raise SystemExit(1)
 
     # Buduj slug

@@ -169,5 +169,140 @@
     "slugs": ["implantologia", "periodontologia"],
     "organizer": "Polskie Stowarzyszenie Implantologiczne (PSI)",
     "url": "https://psi-icoi.pl/kongresy"
+  },
+  {
+    "name": "Kongres Polskiego Towarzystwa Chirurgii Stomatologicznej i Szczękowo-Twarzowej 2025",
+    "date": "8-10 maja 2025",
+    "city": "Lublin",
+    "specialty": "Chirurgia stomatologiczna",
+    "slugs": ["chirurgia-stomatologiczna"],
+    "organizer": "Polskie Towarzystwo Chirurgii Stomatologicznej i Szczękowo-Twarzowej",
+    "url": "http://www.ptchsist.pl/konges-2025/"
+  },
+  {
+    "name": "XXXI Expodent 2025 – Ogólnopolskie Targi i Konferencja Stomatologiczna",
+    "date": "24-25 października 2025",
+    "city": "Toruń (Aula UMK)",
+    "specialty": "Stomatologia ogólna",
+    "slugs": ["stomatologia"],
+    "organizer": "Expo-Andre",
+    "url": "https://expo-andre.pl/expodent/"
+  },
+  {
+    "name": "Konferencja Ortodoncji w Praktyce 2025",
+    "date": "22 listopada 2025",
+    "city": "Kraków",
+    "specialty": "Ortodoncja",
+    "slugs": ["ortodoncja"],
+    "organizer": "Elamed Media Group",
+    "url": "https://konferencja-owp.elamed.pl/"
+  },
+  {
+    "name": "VII Konferencja Periodontologiczna PERIO 2025",
+    "date": "21-22 lutego 2025",
+    "city": "Warszawa",
+    "specialty": "Periodontologia",
+    "slugs": ["periodontologia"],
+    "organizer": "C.WITT Dental / Polskie Towarzystwo Periodontologiczne",
+    "url": "https://cwittdental.pl/kursy/vii-konferencja-periodontologiczna-2025/"
+  },
+  {
+    "name": "MEDIF Day 2025 – Konferencja Implantologiczna",
+    "date": "4 października 2025",
+    "city": "Warszawa",
+    "specialty": "Implantologia",
+    "slugs": ["implantologia"],
+    "organizer": "MEDIF sp. z o.o.",
+    "url": "https://medifday.pl/"
+  },
+  {
+    "name": "IV Kongres Polskiej Akademii Alignerowej",
+    "date": "19-20 września 2025",
+    "city": "Kraków",
+    "specialty": "Ortodoncja, Alignery",
+    "slugs": ["ortodoncja"],
+    "organizer": "Polska Akademia Alignerowa",
+    "url": "https://paacongress.pl/"
+  },
+  {
+    "name": "Kongres CAD/CAM 2026 – Największe Wydarzenie Stomatologii Cyfrowej",
+    "date": "6-7 marca 2026",
+    "city": "Warszawa (Hotel Marriott)",
+    "specialty": "Stomatologia cyfrowa, Protetyka",
+    "slugs": ["stomatologia", "protetyka"],
+    "organizer": "Optident",
+    "url": "https://lp.optident.pl/kongres-cadcam"
+  },
+  {
+    "name": "Endomeeting 2026 – XII Konferencja Endodontyczna",
+    "date": "20-21 marca 2026",
+    "city": "Łódź (Vienna House Andel's)",
+    "specialty": "Endodoncja",
+    "slugs": ["endodoncja"],
+    "organizer": "Dental Class",
+    "url": "https://dentalclass.pl/event/endomeeting-2026/"
+  },
+  {
+    "name": "Konferencja Polskiego Towarzystwa Periodontologicznego PERIO 2026",
+    "date": "20-21 marca 2026",
+    "city": "Warszawa",
+    "specialty": "Periodontologia",
+    "slugs": ["periodontologia"],
+    "organizer": "Polskie Towarzystwo Periodontologiczne / WUM",
+    "url": "https://periodontologia.wum.edu.pl/konferencja-polskiego-towarzystwa-periodontologicznego-perio-2026"
+  },
+  {
+    "name": "WDI 2026 – Wrocławskie Dni Implantologii",
+    "date": "29-31 maja 2026",
+    "city": "Wrocław (Q Hotel Plus Bielany)",
+    "specialty": "Implantologia",
+    "slugs": ["implantologia"],
+    "organizer": "Polskie Towarzystwo Stomatologiczne",
+    "url": "https://wdi.wroclaw.pl/"
+  },
+  {
+    "name": "XXIII Międzynarodowy Kongres Stomatologiczny Dental Spaghetti 2026",
+    "date": "17-18 kwietnia 2026",
+    "city": "Kraków (EXPO Kraków)",
+    "specialty": "Stomatologia estetyczna, Ortodoncja",
+    "slugs": ["stomatologia", "stomatologia-estetyczna", "ortodoncja"],
+    "organizer": "Targi w Krakowie",
+    "url": "https://dentalspaghetti.pl"
+  },
+  {
+    "name": "19. DENTWIL 2026 – Konferencja Komisji Stomatologicznej WIL",
+    "date": "28-31 maja 2026",
+    "city": "Jurata (Hotel Delfin)",
+    "specialty": "Stomatologia ogólna",
+    "slugs": ["stomatologia"],
+    "organizer": "Komisja Stomatologiczna Wojskowej Izby Lekarskiej",
+    "url": "https://szkolastomatologii.pl/dentwil26"
+  },
+  {
+    "name": "Power Dent Girls – Konferencja Stomatologiczna 2026",
+    "date": "17 października 2026",
+    "city": "Warszawa (DoubleTree by Hilton)",
+    "specialty": "Stomatologia ogólna, Endodoncja",
+    "slugs": ["stomatologia", "endodoncja"],
+    "organizer": "Medyczne Centrum Szkoleniowe Karaś",
+    "url": "https://powerdentgirls.pl/"
+  },
+  {
+    "name": "Kampus Ortodontyczny Olsztyn 2026",
+    "date": "2-12 sierpnia 2026",
+    "city": "Olsztyn (Hotel Omega)",
+    "specialty": "Ortodoncja",
+    "slugs": ["ortodoncja"],
+    "organizer": "Polkard Sp. z o.o.",
+    "url": "https://kampusortodontyczny.pl/"
+  },
+  {
+    "name": "MEDIF Day 2026 – Konferencja Implantologiczno-Protetyczna",
+    "date": "3 października 2026",
+    "city": "Warszawa",
+    "specialty": "Implantologia",
+    "slugs": ["implantologia"],
+    "organizer": "MEDIF sp. z o.o.",
+    "url": "https://medifday.pl/"
   }
 ]
