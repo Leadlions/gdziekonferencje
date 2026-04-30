@@ -45,10 +45,74 @@ const CITIES: Record<string, {
     match: ['lodz', 'lodzi', 'belchatow', 'slok'],
     desc: 'Lodz to rozwijajace sie centrum konferencji medycznych centralnej Polski. OIL w Lodzi regularnie organizuje konferencje szkoleniowe dla lekarzy dentystow z regionu, a Asysdent Conference przyciaga higienistki i asystentki stomatologiczne z calego kraju.',
   },
+  katowice: {
+    name: 'Katowice',
+    where: 'w Katowicach',
+    match: ['katowice', 'katowicach', 'wisla', 'silesia', 'bielsko', 'czestochowa'],
+    desc: 'Katowice i caly region slaski to jedno z najwazniejszych centrow stomatologicznych w Polsce. OIL w Katowicach organizuje coroczne konferencje szkoleniowe, a doskonala infrastruktura transportowa przyciaga uczestnikow z calego poludnia kraju.',
+  },
+  lublin: {
+    name: 'Lublin',
+    where: 'w Lublinie',
+    match: ['lublin', 'lublinie'],
+    desc: 'Lublin to akademickie centrum wschodniej Polski z silnym wydzialem stomatologii Uniwersytetu Medycznego. Konferencje stomatologiczne w Lublinie przyciagaja lekarzy z Lubelszczyzny, Podkarpacia i wschodniej Polski.',
+  },
+  bydgoszcz: {
+    name: 'Bydgoszcz',
+    where: 'w Bydgoszczy',
+    match: ['bydgoszcz', 'bydgoszczy', 'torun'],
+    desc: 'Bydgoszcz i Torun tworza duopol akademicki kujawsko-pomorskiego. DentalTutor Conference to jedno z najwazniejszych wydarzen stomatologicznych organizowanych w Bydgoszczy, przyciagajace prelegentow z calej Polski.',
+  },
+  szczecin: {
+    name: 'Szczecin',
+    where: 'w Szczecinie',
+    match: ['szczecin', 'szczecinie'],
+    desc: 'Szczecin to centrum stomatologiczne polnocno-zachodniej Polski, blisko granicy z Niemcami. Konferencje w Szczecinie czesto maja charakter miedzynarodowy dzieki polozeniu przy granicy i bliskosci osrodkow akademickich po obu stronach Odry.',
+  },
+  rzeszow: {
+    name: 'Rzeszów',
+    where: 'w Rzeszowie',
+    match: ['rzeszow', 'rzeszowie'],
+    desc: 'Rzeszow to dynamicznie rozwijajaca sie stolica Podkarpacia z aktywnym srodowiskiem stomatologicznym. OIL w Rzeszowie regularnie organizuje szkolenia i konferencje dla lekarzy dentystow z regionu.',
+  },
+  bialystok: {
+    name: 'Białystok',
+    where: 'w Białymstoku',
+    match: ['bialystok', 'bialymstoku'],
+    desc: 'Bialystok to centrum akademickie polnocno-wschodniej Polski z Uniwersytetem Medycznym prowadzacym kierunek stomatologii. Konferencje organizowane przez OIL w Bialymstoku obsluguja lekarzy z Podlasia i Warmii.',
+  },
+  olsztyn: {
+    name: 'Olsztyn',
+    where: 'w Olsztynie',
+    match: ['olsztyn', 'olsztynie'],
+    desc: 'Olsztyn to stolica Warmii i Mazur, region z rosnaca liczba konferencji medycznych. Polozenie w sercu Mazur sprawia, ze szkolenia w Olsztynie czesto lacza ksztaltowanie umiejetnosci z atrakcyjna forma weekendowa.',
+  },
+  kielce: {
+    name: 'Kielce',
+    where: 'w Kielcach',
+    match: ['kielce', 'kielcach', 'kielce'],
+    desc: 'Kielce to miasto konferencyjne centralnej Polski. Targi Kielce to jedno z wiekszych centrow wystawienniczych w kraju - DENTOPOLIS organizowany w Kielcach to jeden z najwiekszych festiwali stomatologii praktycznej w Polsce.',
+  },
+  opole: {
+    name: 'Opole',
+    where: 'w Opolu',
+    match: ['opole', 'opolu'],
+    desc: 'Opole to stolica wojewodztwa opolskiego z aktywna izba lekarska organizujaca szkolenia dla lekarzy dentystow z regionu. Polozenie miedzy Wroclawiem a Katowicami sprzyja organizacji kameralnych kursow dla dentystow z poludnia Polski.',
+  },
+  'zielona-gora': {
+    name: 'Zielona Góra',
+    where: 'w Zielonej Górze',
+    match: ['zielona', 'gorzow'],
+    desc: 'Zielona Gora to stolica lubuskiego, region z rosnacym rynkiem stomatologicznym. OIL w Zielonej Gorze organizuje szkolenia i konferencje dla dentystow z zachodniego pogranicza Polski.',
+  },
 };
 
 export function getStaticPaths() {
-  const keys = ['warszawa', 'krakow', 'gdansk', 'wroclaw', 'poznan', 'lodz'];
+  const keys = [
+    'warszawa', 'krakow', 'gdansk', 'wroclaw', 'poznan', 'lodz',
+    'katowice', 'lublin', 'bydgoszcz', 'szczecin', 'rzeszow',
+    'bialystok', 'olsztyn', 'kielce', 'opole', 'zielona-gora',
+  ];
   return keys.map(miasto => ({
     params: { miasto },
     props: { miasto },
