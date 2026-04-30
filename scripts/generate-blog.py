@@ -74,8 +74,8 @@ TARGET_KEYWORDS = [
     "overdenture protezy na implantach kurs",
     "protetyka most na implantach kurs",
     "kurs gipsowania artykulatora okluzja",
-    "leczenie wad szkieletowych ortodoncja chirurgia",
-    "myofunkcjonalna terapia ortodoncja szkolenie",
+    "kurs ortodoncja chirurgia szczekowa wspolpraca",
+    "myofunkcjonalna ortodoncja szkolenie dla dentystow",
     # --- Biznes, prawo, zarzadzanie ---
     "marketing gabinetu stomatologicznego szkolenie",
     "prawo medyczne dla dentystow kurs",
