@@ -1,8 +1,10 @@
-﻿---
+---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import SpecializationCard from '../components/SpecializationCard.astro';
 import BlogPostCard from '../components/BlogPostCard.astro';
+import ConferenceCard from '../components/ConferenceCard.astro';
+import allConferences from '../data/conferences.json';
 
 const blogPosts = (await getCollection('blog'))
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
@@ -10,14 +12,14 @@ const blogPosts = (await getCollection('blog'))
 
 const SPECIALIZATIONS = [
   { title: 'Stomatologia', description: 'Konferencje ogólnostomatologiczne - fundament dla każdego dentysty.', href: '/konferencje/stomatologia/', icon: '🦷' },
-  { title: 'Implantologia', description: 'Systemy implantologiczne, chirurgia, protokoły obciążenia.', href: '/konferencje/implantologia/', icon: '🔩' },
-  { title: 'Protetyka', description: 'CAD/CAM, cyrkonia, protezy stałe i ruchome na implantach.', href: '/konferencje/protetyka/', icon: '🦴' },
-  { title: 'Stomatologia estetyczna', description: 'Licówki, wybielanie, Digital Smile Design.', href: '/konferencje/stomatologia-estetyczna/', icon: '✨' },
-  { title: 'Ortodoncja', description: 'Aparaty stałe, alignery, cyfrowe planowanie leczenia.', href: '/konferencje/ortodoncja/', icon: '📐' },
-  { title: 'Chirurgia stomatologiczna', description: 'Ekstrakcje złożone, augmentacje, chirurgia szczękowo-twarzowa.', href: '/konferencje/chirurgia-stomatologiczna/', icon: '⚕️' },
-  { title: 'Periodontologia', description: 'Leczenie chorób przyzębia, terapia implantów.', href: '/konferencje/periodontologia/', icon: '🔬' },
-  { title: 'Endodoncja', description: 'Leczenie kanałowe pod mikroskopem, techniki NiTi.', href: '/konferencje/endodoncja/', icon: '🔭' },
-  { title: 'Stomatologia dziecięca', description: 'Pedodoncja, profilaktyka, leczenie najmłodszych pacjentów.', href: '/konferencje/stomatologia-dziecieca/', icon: '🧒' },
+  { title: 'Implantologia', description: 'Systemy implantologiczne, chirurgia, protokoly obciazenia.', href: '/konferencje/implantologia/', icon: '🔩' },
+  { title: 'Protetyka', description: 'CAD/CAM, cyrkonia, protezy stale i ruchome na implantach.', href: '/konferencje/protetyka/', icon: '🦴' },
+  { title: 'Stomatologia estetyczna', description: 'Licowki, wybielanie, Digital Smile Design.', href: '/konferencje/stomatologia-estetyczna/', icon: '✨' },
+  { title: 'Ortodoncja', description: 'Aparaty stale, alignery, cyfrowe planowanie leczenia.', href: '/konferencje/ortodoncja/', icon: '📐' },
+  { title: 'Chirurgia stomatologiczna', description: 'Ekstrakcje zlozone, augmentacje, chirurgia szczekowo-twarzowa.', href: '/konferencje/chirurgia-stomatologiczna/', icon: '⚕️' },
+  { title: 'Periodontologia', description: 'Leczenie chorob przyzebia, terapia implantow.', href: '/konferencje/periodontologia/', icon: '🔬' },
+  { title: 'Endodoncja', description: 'Leczenie kanalowe pod mikroskopem, techniki NiTi.', href: '/konferencje/endodoncja/', icon: '🔭' },
+  { title: 'Stomatologia dziecieca', description: 'Pedodoncja, profilaktyka, leczenie najmlodszych pacjentow.', href: '/konferencje/stomatologia-dziecieca/', icon: '🧒' },
 ];
 
 const jsonLd = {
@@ -33,48 +35,91 @@ const jsonLd = {
     'query-input': 'required name=search_term_string',
   },
 };
+
+// Embed conferences as JSON for client-side filtering
+const conferencesJson = JSON.stringify(allConferences);
 ---
 
 <Base
   title="Konferencje medyczne w Polsce - gdzie-konferencje.pl"
-  description="Znajdź konferencje, kursy i sympozja medyczne w Polsce. Jeden portal, wszystkie terminy. Stomatologia, implantologia, protetyka, ortodoncja i wiecej specjalizacji."
+  description="Znajdz konferencje, kursy i sympozja medyczne w Polsce. Jeden portal, wszystkie terminy. Stomatologia, implantologia, protetyka, ortodoncja i wiecej specjalizacji."
   jsonLd={jsonLd}
 >
-  <!-- HERO -->
-  <section class="bg-gradient-to-b from-brand-50 to-white px-4 py-16 sm:px-6 sm:py-24">
+  <!-- HERO z wyszukiwarką -->
+  <section class="bg-gradient-to-b from-brand-50 to-white px-4 pb-12 pt-16 sm:px-6 sm:pt-20">
     <div class="mx-auto max-w-3xl text-center">
-      <p class="mb-4 text-sm font-semibold uppercase tracking-widest text-brand-600">Portal konferencji</p>
+      <p class="mb-4 text-sm font-semibold uppercase tracking-widest text-brand-600">Portal konferencji medycznych</p>
       <h1 class="text-4xl font-bold leading-tight text-slate-900 sm:text-5xl">
         Konferencje medyczne<br class="hidden sm:block" /> w Polsce
       </h1>
       <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
-        Jeden portal, wszystkie terminy. Znajdź konferencje, kursy i sympozja
+        Jeden portal, wszystkie terminy. Znajdz konferencje, kursy i sympozja
         dopasowane do Twojej specjalizacji i zdobywaj punkty edukacyjne NIL.
       </p>
-      <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-        <a
-          href="#specjalizacje"
-          class="w-full rounded-lg bg-brand-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-800 sm:w-auto"
-        >
-          Przeglądaj konferencje
-        </a>
-        <a
-          href="#dodaj-konferencje"
-          class="w-full rounded-lg border border-brand-300 px-6 py-3 font-semibold text-brand-700 transition-colors hover:bg-brand-50 sm:w-auto"
-        >
-          Dodaj konferencję
-        </a>
+
+      <!-- WYSZUKIWARKA -->
+      <div class="mx-auto mt-8 max-w-xl">
+        <div class="relative">
+          <svg class="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input
+            id="city-search"
+            type="text"
+            placeholder="Wpisz miasto, np. Warszawa, Krakow, Gdansk..."
+            autocomplete="off"
+            class="w-full rounded-xl border border-slate-200 bg-white py-4 pl-12 pr-4 text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100"
+          />
+        </div>
+        <p id="search-hint" class="mt-2 text-sm text-slate-400">lub przegladaj wedlug specjalizacji ponizej</p>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
+  <!-- KONFERENCJE (filtrowalne) -->
+  <section class="px-4 py-10 sm:px-6">
+    <div class="mx-auto max-w-4xl">
+      <div class="mb-5 flex items-center justify-between">
+        <h2 class="text-xl font-bold text-slate-900">Nadchodzace konferencje</h2>
+        <span id="conf-count" class="rounded-full bg-brand-50 px-3 py-1 text-sm font-medium text-brand-700">
+          {allConferences.length} konferencji
+        </span>
+      </div>
+
+      <div id="conf-list" class="flex flex-col gap-3">
+        {allConferences.map(c => (
+          <div
+            class="conf-item"
+            data-city={c.city.toLowerCase()}
+          >
+            <ConferenceCard
+              name={c.name}
+              date={c.date}
+              city={c.city}
+              specialty={c.specialty}
+              organizer={c.organizer}
+              url={c.url}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div id="no-results" class="hidden rounded-xl border border-dashed border-slate-300 bg-slate-50 px-6 py-12 text-center">
+        <p class="font-medium text-slate-600">Brak konferencji w tej miejscowosci.</p>
+        <p class="mt-2 text-sm text-slate-400">
+          Sprawdz ogolnopolski kalendarz lub przegladaj wedlug specjalizacji.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- JAK TO DZIALA -->
   <section class="border-y border-slate-100 bg-slate-50 px-4 py-10 sm:px-6">
     <div class="mx-auto grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-3">
       {[
-        { step: '01', title: 'Znajdź konferencję', desc: 'Przeglądaj według specjalizacji, miasta i daty.' },
-        { step: '02', title: 'Zapisz się u organizatora', desc: 'Link prowadzi bezpośrednio do strony rejestracji.' },
-        { step: '03', title: 'Zbieraj punkty edukacyjne', desc: 'Śledź konferencje akredytowane przez NIL.' },
+        { step: '01', title: 'Znajdz konferencje', desc: 'Przegladaj wedlug specjalizacji, miasta i daty.' },
+        { step: '02', title: 'Zapisz sie u organizatora', desc: 'Link prowadzi bezposrednio do strony rejestracji.' },
+        { step: '03', title: 'Zbieraj punkty edukacyjne', desc: 'Sledz konferencje akredytowane przez NIL.' },
       ].map(({ step, title, desc }) => (
         <div class="flex items-start gap-4">
           <span class="shrink-0 text-2xl font-bold text-brand-200">{step}</span>
@@ -87,11 +132,11 @@ const jsonLd = {
     </div>
   </section>
 
-  <!-- SPECIALIZATIONS -->
+  <!-- SPECJALIZACJE -->
   <section id="specjalizacje" class="px-4 py-16 sm:px-6">
     <div class="mx-auto max-w-6xl">
-      <h2 class="text-2xl font-bold text-slate-900">Konferencje według specjalizacji</h2>
-      <p class="mt-2 text-slate-500">Wybierz dziedzinę, aby zobaczyć artykuł i nadchodzące konferencje.</p>
+      <h2 class="text-2xl font-bold text-slate-900">Konferencje wedlug specjalizacji</h2>
+      <p class="mt-2 text-slate-500">Wybierz dziedzine, aby zobaczyc artykul i nadchodzace konferencje.</p>
       <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {SPECIALIZATIONS.map(s => (
           <SpecializationCard {...s} />
@@ -107,7 +152,7 @@ const jsonLd = {
         <div class="flex items-end justify-between">
           <div>
             <h2 class="text-2xl font-bold text-slate-900">Blog ekspercki</h2>
-            <p class="mt-1 text-slate-500">Praktyczna wiedza dla dentystów i techników.</p>
+            <p class="mt-1 text-slate-500">Praktyczna wiedza dla dentystow i technikow.</p>
           </div>
           <a href="/blog/" class="text-sm font-medium text-brand-600 hover:text-brand-800">
             Wszystkie wpisy &rarr;
@@ -127,21 +172,40 @@ const jsonLd = {
       </div>
     </section>
   )}
-
-  <!-- CTA ORGANIZERS -->
-  <section id="dodaj-konferencje" class="px-4 py-16 sm:px-6">
-    <div class="mx-auto max-w-3xl rounded-2xl bg-brand-800 px-8 py-12 text-center text-white">
-      <h2 class="text-2xl font-bold">Organizujesz konferencję medyczną?</h2>
-      <p class="mx-auto mt-3 max-w-lg text-brand-100">
-        Dodaj swoje wydarzenie bezpłatnie. Dotrzyj do tysięcy lekarzy, techników
-        i firm z branży medycznej.
-      </p>
-      <a
-        href="mailto:kontakt@gdzie-konferencje.pl"
-        class="mt-6 inline-block rounded-lg bg-white px-6 py-3 font-semibold text-brand-800 transition-colors hover:bg-brand-50"
-      >
-        Napisz do nas
-      </a>
-    </div>
-  </section>
 </Base>
+
+<script>
+  function norm(str: string): string {
+    return str.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  }
+
+  const input = document.getElementById('city-search') as HTMLInputElement;
+  const items = document.querySelectorAll<HTMLElement>('.conf-item');
+  const noResults = document.getElementById('no-results') as HTMLElement;
+  const countEl = document.getElementById('conf-count') as HTMLElement;
+  const hint = document.getElementById('search-hint') as HTMLElement;
+
+  const total = items.length;
+
+  input?.addEventListener('input', () => {
+    const query = norm(input.value.trim());
+    let visible = 0;
+
+    items.forEach(item => {
+      const city = norm(item.dataset.city ?? '');
+      const show = !query || city.includes(query);
+      item.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    noResults.classList.toggle('hidden', visible > 0);
+
+    if (query) {
+      countEl.textContent = `${visible} konferencji w "${input.value.trim()}"`;
+      hint.textContent = '';
+    } else {
+      countEl.textContent = `${total} konferencji`;
+      hint.textContent = 'lub przegladaj wedlug specjalizacji ponizej';
+    }
+  });
+</script>

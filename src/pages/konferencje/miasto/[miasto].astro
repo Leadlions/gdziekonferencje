@@ -1,0 +1,220 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ConferenceCard from '../../../components/ConferenceCard.astro';
+import allConferences from '../../../data/conferences.json';
+
+const CITIES: Record<string, {
+  name: string;
+  where: string;
+  match: string[];
+  desc: string;
+}> = {
+  warszawa: {
+    name: 'Warszawa',
+    where: 'w Warszawie',
+    match: ['warszawa', 'warsaw', 'jozefow', 'nadarzyn', 'serock', 'legionowo'],
+    desc: 'Warszawa jest glownym centrum konferencji medycznych w Polsce. Duze hotele kongresowe, centrum wystawiennicze EXPO i swietna dostepnosc komunikacyjna przyciagaja organizatorow najwiekszych kongresow stomatologicznych w kraju.',
+  },
+  krakow: {
+    name: 'Kraków',
+    where: 'w Krakowie',
+    match: ['krakow', 'krakowie', 'rytro', 'wieliczka'],
+    desc: 'Krakow to drugie co do wielkosci centrum akademickie i konferencyjne w Polsce. EXPO Krakow, liczne hotele kongresowe i bliskosc uczelni medycznych sprawiaja, ze w Krakowie odbywaja sie regularnie miedzynarodowe kongresy stomatologiczne, m.in. KRAKDENT.',
+  },
+  gdansk: {
+    name: 'Gdańsk',
+    where: 'w Gdańsku',
+    match: ['gdansk', 'gdansku', 'sopot', 'gdynia', 'trojmiasto'],
+    desc: 'Trojmiasto - Gdansk, Gdynia i Sopot - to popularny cel konferencji medycznych laczacy wysokiej klasy zaplecze kongresowe z atrakcyjnym polozeniem nad morzem. Sopot jest szczegolnie popularny jako miejsce konferencji stomatologicznych i estetycznych.',
+  },
+  wroclaw: {
+    name: 'Wrocław',
+    where: 'we Wrocławiu',
+    match: ['wroclaw', 'wroclawiu'],
+    desc: 'Wroclaw to dynamicznie rozwijajace sie centrum akademickie z silna tradycja kongresow medycznych. Centrum wystawiennicze i liczne hotele kongresowe przyciagaja organizatorow ogolnopolskich zjazdow towarzystw stomatologicznych.',
+  },
+  poznan: {
+    name: 'Poznań',
+    where: 'w Poznaniu',
+    match: ['poznan', 'poznaniu', 'mtp'],
+    desc: 'Poznan to miasto targowe z jednym z najlepiej wyposazonych centrow wystawienniczych w Polsce - MTP Expo. Co roku odbywa sie tu CEDE (Central European Dental Exhibition), jeden z najwazniejszych kongresow stomatologicznych w Europie Srodkowej.',
+  },
+  lodz: {
+    name: 'Łódź',
+    where: 'w Łodzi',
+    match: ['lodz', 'lodzi', 'belchatow', 'slok'],
+    desc: 'Lodz to rozwijajace sie centrum konferencji medycznych centralnej Polski. OIL w Lodzi regularnie organizuje konferencje szkoleniowe dla lekarzy dentystow z regionu, a Asysdent Conference przyciaga higienistki i asystentki stomatologiczne z calego kraju.',
+  },
+};
+
+export function getStaticPaths() {
+  const keys = ['warszawa', 'krakow', 'gdansk', 'wroclaw', 'poznan', 'lodz'];
+  return keys.map(miasto => ({
+    params: { miasto },
+    props: { miasto },
+  }));
+}
+
+function normalize(str: string): string {
+  return str.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+}
+
+const { miasto } = Astro.props;
+const cityData = CITIES[miasto];
+
+const cityConferences = allConferences.filter(c => {
+  const cityNorm = normalize(c.city);
+  return cityData.match.some(m => cityNorm.includes(m));
+});
+
+const title = `Konferencje stomatologiczne ${cityData.where} - gdzie-konferencje.pl`;
+const description = `Konferencje, kursy i szkolenia stomatologiczne ${cityData.where}. Sprawdz nadchodzace terminy kongresow i kursow dla lekarzy dentystow w ${cityData.name}.`;
+const canonicalUrl = `https://gdzie-konferencje.pl/konferencje/miasto/${miasto}/`;
+
+const breadcrumbs = [
+  { name: 'Konferencje', url: 'https://gdzie-konferencje.pl/konferencje/stomatologia/' },
+  { name: cityData.name, url: canonicalUrl },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  name: title,
+  description,
+  url: canonicalUrl,
+  inLanguage: 'pl',
+};
+
+const otherCities = Object.entries(CITIES).filter(([slug]) => slug !== miasto);
+
+// Group conferences by specialization
+const bySpecialty = cityConferences.reduce<Record<string, typeof cityConferences>>((acc, c) => {
+  const key = c.specialty;
+  if (!acc[key]) acc[key] = [];
+  acc[key].push(c);
+  return acc;
+}, {});
+---
+
+<Base title={title} description={description} breadcrumbs={breadcrumbs} jsonLd={jsonLd}>
+  <div class="mx-auto max-w-4xl px-4 py-10 sm:px-6">
+
+    <!-- BREADCRUMBS -->
+    <nav class="mb-6 text-sm text-slate-500">
+      <ol class="flex flex-wrap items-center gap-1.5">
+        <li><a href="/" class="hover:text-brand-700">Strona glowna</a></li>
+        <li class="text-slate-300">/</li>
+        <li><a href="/konferencje/stomatologia/" class="hover:text-brand-700">Konferencje</a></li>
+        <li class="text-slate-300">/</li>
+        <li class="font-medium text-slate-800" aria-current="page">{cityData.name}</li>
+      </ol>
+    </nav>
+
+    <!-- HERO -->
+    <h1 class="text-3xl font-bold text-slate-900 sm:text-4xl">
+      Konferencje stomatologiczne {cityData.where}
+    </h1>
+    <p class="mt-3 text-lg text-slate-600">
+      Znajdz konferencje, kursy i szkolenia stomatologiczne organizowane {cityData.where}
+      i w okolicach. Sprawdz aktualne terminy i zapisz sie bezposrednio u organizatora.
+    </p>
+
+    <!-- LICZNIK -->
+    <div class="mt-4 flex gap-4">
+      <span class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-sm font-medium text-brand-700">
+        <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        {cityConferences.length} {cityConferences.length === 1 ? 'konferencja' : cityConferences.length < 5 ? 'konferencje' : 'konferencji'}
+      </span>
+    </div>
+
+    <!-- LISTING -->
+    <section class="mt-8">
+      {cityConferences.length > 0 ? (
+        <div class="flex flex-col gap-3">
+          {cityConferences.map(c => (
+            <ConferenceCard
+              name={c.name}
+              date={c.date}
+              city={c.city}
+              specialty={c.specialty}
+              organizer={c.organizer}
+              url={c.url}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="rounded-xl border border-dashed border-slate-300 bg-slate-50 px-6 py-12 text-center">
+          <p class="font-medium text-slate-600">
+            Aktualnie brak zaplanowanych konferencji {cityData.where}.
+          </p>
+          <p class="mt-2 text-sm text-slate-400">
+            Sprawdz ogolnopolski kalendarz lub inne miasta.
+          </p>
+          <a
+            href="/konferencje/stomatologia/"
+            class="mt-6 inline-block rounded-md bg-brand-700 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-800"
+          >
+            Wszystkie konferencje w Polsce
+          </a>
+        </div>
+      )}
+    </section>
+
+    <!-- SEO TEXT -->
+    <section class="mt-12 rounded-xl border border-slate-100 bg-slate-50 p-6">
+      <h2 class="text-lg font-bold text-slate-800">
+        Konferencje stomatologiczne {cityData.where} - informacje
+      </h2>
+      <p class="mt-3 text-sm leading-relaxed text-slate-600">
+        {cityData.desc}
+      </p>
+      <p class="mt-3 text-sm leading-relaxed text-slate-600">
+        Portal gdzie-konferencje.pl agreguje informacje o konferencjach stomatologicznych {cityData.where}
+        z roznych zrodel - towarzystw naukowych, izb lekarskich i organizatorow prywatnych.
+        Dzieki temu nie musisz sledzic wielu stron jednoczesnie - wszystkie terminy znajdziesz w jednym miejscu.
+      </p>
+    </section>
+
+    <!-- INNE MIASTA -->
+    <section class="mt-10">
+      <h2 class="text-base font-semibold text-slate-700">
+        Konferencje stomatologiczne w innych miastach
+      </h2>
+      <div class="mt-3 flex flex-wrap gap-2">
+        {otherCities.map(([slug, c]) => (
+          <a
+            href={`/konferencje/miasto/${slug}/`}
+            class="rounded-full border border-slate-200 px-4 py-1.5 text-sm text-slate-600 transition-colors hover:border-brand-300 hover:text-brand-700"
+          >
+            {c.name}
+          </a>
+        ))}
+        <a
+          href="/konferencje/stomatologia/"
+          class="rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5 text-sm font-medium text-brand-700 hover:bg-brand-100"
+        >
+          Cala Polska
+        </a>
+      </div>
+    </section>
+
+    <!-- SPECJALIZACJE W TYM MIESCIE -->
+    {cityConferences.length > 0 && (
+      <section class="mt-10">
+        <h2 class="text-base font-semibold text-slate-700">
+          Specjalizacje na konferencjach {cityData.where}
+        </h2>
+        <div class="mt-3 flex flex-wrap gap-2">
+          {Object.keys(bySpecialty).map(spec => (
+            <span class="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600">
+              {spec}
+            </span>
+          ))}
+        </div>
+      </section>
+    )}
+
+  </div>
+</Base>

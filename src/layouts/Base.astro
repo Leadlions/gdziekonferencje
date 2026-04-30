@@ -49,6 +49,27 @@ const allSchemas = [
   ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
   ...(breadcrumbSchema ? [breadcrumbSchema] : []),
 ];
+
+const specializations = [
+  { name: 'Stomatologia', href: '/konferencje/stomatologia/' },
+  { name: 'Implantologia', href: '/konferencje/implantologia/' },
+  { name: 'Protetyka', href: '/konferencje/protetyka/' },
+  { name: 'Stomatologia estetyczna', href: '/konferencje/stomatologia-estetyczna/' },
+  { name: 'Ortodoncja', href: '/konferencje/ortodoncja/' },
+  { name: 'Chirurgia stomatologiczna', href: '/konferencje/chirurgia-stomatologiczna/' },
+  { name: 'Periodontologia', href: '/konferencje/periodontologia/' },
+  { name: 'Endodoncja', href: '/konferencje/endodoncja/' },
+  { name: 'Stomatologia dziecięca', href: '/konferencje/stomatologia-dziecieca/' },
+];
+
+const cities = [
+  { name: 'Warszawa', href: '/konferencje/miasto/warszawa/' },
+  { name: 'Kraków', href: '/konferencje/miasto/krakow/' },
+  { name: 'Gdańsk', href: '/konferencje/miasto/gdansk/' },
+  { name: 'Wrocław', href: '/konferencje/miasto/wroclaw/' },
+  { name: 'Poznań', href: '/konferencje/miasto/poznan/' },
+  { name: 'Łódź', href: '/konferencje/miasto/lodz/' },
+];
 ---
 
 <!doctype html>
@@ -69,15 +90,61 @@ const allSchemas = [
     <meta property="og:url" content={canonical} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
 
     {allSchemas.length > 0 && (
       <script type="application/ld+json" set:html={JSON.stringify(allSchemas)} />
     )}
   </head>
   <body class="bg-white text-slate-800 antialiased">
+
+    <!-- DISCLAIMER MODAL -->
+    <div
+      id="disclaimer-modal"
+      class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/80 p-4 backdrop-blur-sm"
+    >
+      <div class="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl">
+        <div class="flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="6" fill="#075985"/>
+            <rect x="13" y="5" width="6" height="11" rx="3" fill="white"/>
+            <path d="M9 14 Q9 21 16 21 Q23 21 23 14" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <line x1="16" y1="21" x2="16" y2="26" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="11" y1="26" x2="21" y2="26" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span class="font-bold text-brand-800">gdzie-konferencje.pl</span>
+        </div>
+        <h2 class="mt-4 text-xl font-bold text-slate-900">Serwis dla profesjonalistów</h2>
+        <p class="mt-3 text-sm leading-relaxed text-slate-600">
+          Portal gdzie-konferencje.pl skierowany jest do lekarzy dentystów, techników dentystycznych oraz przedstawicieli branży medycznej. Zamieszczone treści mają charakter edukacyjny i zawodowy, przeznaczony dla wykwalifikowanych pracowników ochrony zdrowia.
+        </p>
+        <p class="mt-4 text-sm font-semibold text-slate-800">
+          Czy jesteś lekarzem dentystą, technikiem dentystycznym lub pracownikiem branży medycznej?
+        </p>
+        <div class="mt-5 flex flex-col gap-3">
+          <button
+            id="disclaimer-yes"
+            class="w-full rounded-lg bg-brand-700 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-800"
+          >
+            Tak, jestem lekarzem / pracownikiem medycznym
+          </button>
+          <button
+            id="disclaimer-no"
+            class="w-full rounded-lg border border-slate-200 px-4 py-3 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-50"
+          >
+            Nie, opusc strone
+          </button>
+        </div>
+        <p class="mt-5 text-xs leading-relaxed text-slate-400">
+          Wejscie na strone jest rownoznaczne z oswiadczeniem, ze jestes lekarzem dentysta, technikiem dentystycznym lub pracownikiem branzy medycznej. Portal nie swiadczy uslug medycznych i nie zastepuje porady lekarskiej.
+        </p>
+      </div>
+    </div>
+
+    <!-- HEADER -->
     <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
       <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+
+        <!-- Logo -->
         <a href="/" class="flex items-center gap-2 text-lg font-bold text-brand-800">
           <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
             <rect width="32" height="32" rx="6" fill="#075985"/>
@@ -88,18 +155,100 @@ const allSchemas = [
           </svg>
           gdzie-konferencje.pl
         </a>
-        <nav class="hidden gap-6 text-sm font-medium text-slate-600 sm:flex">
-          <a href="/konferencje/stomatologia/" class="transition-colors hover:text-brand-700">Stomatologia</a>
-          <a href="/konferencje/implantologia/" class="transition-colors hover:text-brand-700">Implantologia</a>
-          <a href="/konferencje/ortodoncja/" class="transition-colors hover:text-brand-700">Ortodoncja</a>
-          <a href="/blog/" class="transition-colors hover:text-brand-700">Blog</a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden items-center gap-0.5 lg:flex">
+
+          <!-- Konferencje dropdown -->
+          <div class="group relative">
+            <button class="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-brand-700">
+              Konferencje
+              <svg class="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="invisible absolute left-0 top-full z-50 mt-1 w-64 rounded-xl border border-slate-100 bg-white p-2 opacity-0 shadow-xl transition-all duration-150 group-hover:visible group-hover:opacity-100">
+              <p class="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-slate-400">Specjalizacje</p>
+              {specializations.map(s => (
+                <a href={s.href} class="block rounded-lg px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700">
+                  {s.name}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- Miasta dropdown -->
+          <div class="group relative">
+            <button class="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-brand-700">
+              Miasta
+              <svg class="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="invisible absolute left-0 top-full z-50 mt-1 w-44 rounded-xl border border-slate-100 bg-white p-2 opacity-0 shadow-xl transition-all duration-150 group-hover:visible group-hover:opacity-100">
+              <p class="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-slate-400">Wybierz miasto</p>
+              {cities.map(c => (
+                <a href={c.href} class="block rounded-lg px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700">
+                  {c.name}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <a href="/blog/" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-brand-700">
+            Blog
+          </a>
+          <a href="/dla-dentystow/" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-brand-700">
+            Dla dentystow
+          </a>
         </nav>
-        <a
-          href="/#dodaj-konferencje"
-          class="hidden rounded-md bg-brand-700 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-800 sm:block"
-        >
-          Dodaj konferencję
-        </a>
+
+        <!-- Right: contact + hamburger -->
+        <div class="flex items-center gap-2">
+          <a
+            href="mailto:kontakt@gdzie-konferencje.pl"
+            class="hidden rounded-md border border-brand-300 px-4 py-2 text-sm font-semibold text-brand-700 transition-colors hover:bg-brand-50 lg:block"
+          >
+            Kontakt
+          </a>
+          <button
+            id="menu-toggle"
+            class="rounded-md p-2 text-slate-600 transition-colors hover:bg-slate-100 lg:hidden"
+            aria-label="Otworz menu"
+          >
+            <svg id="icon-open" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+            <svg id="icon-close" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden border-t border-slate-100 bg-white px-4 pb-5 lg:hidden">
+        <div class="mt-3 space-y-0.5">
+          <p class="px-3 pb-1 pt-3 text-xs font-semibold uppercase tracking-wider text-slate-400">Specjalizacje</p>
+          {specializations.map(s => (
+            <a href={s.href} class="block rounded-lg px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700">
+              {s.name}
+            </a>
+          ))}
+          <p class="px-3 pb-1 pt-4 text-xs font-semibold uppercase tracking-wider text-slate-400">Miasta</p>
+          <div class="grid grid-cols-2 gap-0.5">
+            {cities.map(c => (
+              <a href={c.href} class="rounded-lg px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700">
+                {c.name}
+              </a>
+            ))}
+          </div>
+          <div class="mt-3 border-t border-slate-100 pt-3">
+            <a href="/blog/" class="block rounded-lg px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700">Blog ekspercki</a>
+            <a href="/dla-dentystow/" class="block rounded-lg px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700">Dla dentystow</a>
+            <a href="mailto:kontakt@gdzie-konferencje.pl" class="block rounded-lg px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700">Kontakt</a>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -113,44 +262,73 @@ const allSchemas = [
           <div>
             <p class="text-sm font-semibold text-slate-800">Specjalizacje</p>
             <ul class="mt-3 space-y-2 text-sm text-slate-600">
-              <li><a href="/konferencje/stomatologia/" class="hover:text-brand-700">Stomatologia</a></li>
-              <li><a href="/konferencje/implantologia/" class="hover:text-brand-700">Implantologia</a></li>
-              <li><a href="/konferencje/protetyka/" class="hover:text-brand-700">Protetyka</a></li>
-              <li><a href="/konferencje/stomatologia-estetyczna/" class="hover:text-brand-700">Stomatologia estetyczna</a></li>
-              <li><a href="/konferencje/ortodoncja/" class="hover:text-brand-700">Ortodoncja</a></li>
-              <li><a href="/konferencje/chirurgia-stomatologiczna/" class="hover:text-brand-700">Chirurgia stomatologiczna</a></li>
+              {specializations.map(s => (
+                <li><a href={s.href} class="hover:text-brand-700">{s.name}</a></li>
+              ))}
             </ul>
           </div>
           <div>
             <p class="text-sm font-semibold text-slate-800">Miasta</p>
             <ul class="mt-3 space-y-2 text-sm text-slate-600">
-              <li><a href="/konferencje/stomatologia/warszawa/" class="hover:text-brand-700">Warszawa</a></li>
-              <li><a href="/konferencje/stomatologia/krakow/" class="hover:text-brand-700">Kraków</a></li>
-              <li><a href="/konferencje/stomatologia/gdansk/" class="hover:text-brand-700">Gdańsk</a></li>
-              <li><a href="/konferencje/stomatologia/wroclaw/" class="hover:text-brand-700">Wrocław</a></li>
-              <li><a href="/konferencje/stomatologia/poznan/" class="hover:text-brand-700">Poznań</a></li>
+              {cities.map(c => (
+                <li><a href={c.href} class="hover:text-brand-700">{c.name}</a></li>
+              ))}
             </ul>
           </div>
           <div>
             <p class="text-sm font-semibold text-slate-800">Dla kogo</p>
             <ul class="mt-3 space-y-2 text-sm text-slate-600">
-              <li><a href="/dla-dentystow/" class="hover:text-brand-700">Dla dentystów</a></li>
-              <li><a href="/dla-technikow-dentystycznych/" class="hover:text-brand-700">Dla techników</a></li>
-              <li><a href="/dla-producentow-sprzetu/" class="hover:text-brand-700">Dla producentów</a></li>
+              <li><a href="/dla-dentystow/" class="hover:text-brand-700">Dla dentystow</a></li>
+              <li><a href="/dla-technikow-dentystycznych/" class="hover:text-brand-700">Dla technikow</a></li>
+              <li><a href="/dla-producentow-sprzetu/" class="hover:text-brand-700">Dla producentow</a></li>
             </ul>
           </div>
           <div>
             <p class="text-sm font-semibold text-slate-800">Portal</p>
             <ul class="mt-3 space-y-2 text-sm text-slate-600">
-              <li><a href="/blog/" class="hover:text-brand-700">Blog</a></li>
-              <li><a href="/#dodaj-konferencje" class="hover:text-brand-700">Dodaj konferencję</a></li>
+              <li><a href="/blog/" class="hover:text-brand-700">Blog ekspercki</a></li>
+              <li><a href="mailto:kontakt@gdzie-konferencje.pl" class="hover:text-brand-700">Kontakt</a></li>
             </ul>
           </div>
         </div>
-        <div class="mt-8 border-t border-slate-200 pt-6 text-center text-xs text-slate-400">
-          &copy; {new Date().getFullYear()} gdzie-konferencje.pl &mdash; Wszelkie prawa zastrzeżone
+        <div class="mt-8 border-t border-slate-200 pt-6 text-center text-xs leading-relaxed text-slate-400">
+          &copy; {new Date().getFullYear()} gdzie-konferencje.pl - Wszelkie prawa zastrzezone.<br />
+          Serwis skierowany do lekarzy dentystow, technikow dentystycznych i pracownikow branzy medycznej. Nie zastepuje porady lekarskiej.
         </div>
       </div>
     </footer>
+
+    <script>
+      // --- Disclaimer modal ---
+      const modal = document.getElementById('disclaimer-modal');
+      const yesBtn = document.getElementById('disclaimer-yes');
+      const noBtn = document.getElementById('disclaimer-no');
+
+      if (modal && !localStorage.getItem('gk-prof-consent')) {
+        modal.classList.remove('hidden');
+      }
+
+      yesBtn?.addEventListener('click', () => {
+        localStorage.setItem('gk-prof-consent', '1');
+        modal?.classList.add('hidden');
+      });
+
+      noBtn?.addEventListener('click', () => {
+        window.location.href = 'https://www.google.pl/';
+      });
+
+      // --- Mobile menu ---
+      const toggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const iconOpen = document.getElementById('icon-open');
+      const iconClose = document.getElementById('icon-close');
+
+      toggle?.addEventListener('click', () => {
+        const isHidden = mobileMenu?.classList.contains('hidden');
+        mobileMenu?.classList.toggle('hidden', !isHidden);
+        iconOpen?.classList.toggle('hidden', isHidden ?? false);
+        iconClose?.classList.toggle('hidden', !isHidden);
+      });
+    </script>
   </body>
 </html>
