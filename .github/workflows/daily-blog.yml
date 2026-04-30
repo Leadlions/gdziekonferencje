@@ -1,0 +1,36 @@
+name: Daily Blog Post
+
+on:
+  schedule:
+    - cron: '0 8 * * *'   # codziennie o 8:00 UTC (10:00 polskiego czasu)
+  workflow_dispatch:        # mozliwosc recznego odpalenia z GitHub
+
+jobs:
+  generate-post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Generate blog post
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/generate-blog.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "bot@gdzie-konferencje.pl"
+          git config --local user.name "Blog Bot"
+          git add src/content/blog/
+          git diff --staged --quiet || (git commit -m "Auto: nowy artykul $(date +%Y-%m-%d)" && git push)

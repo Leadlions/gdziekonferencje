@@ -63,12 +63,8 @@ const breadcrumbs = [
     </ol>
   </nav>
 
-  <div class="prose prose-slate max-w-none prose-headings:font-bold prose-a:text-brand-700 prose-a:no-underline hover:prose-a:underline">
-    <Content />
-  </div>
-
-  <!-- CONFERENCE LISTING -->
-  <section class="mt-12">
+  <!-- CONFERENCE LISTING - na górze -->
+  <section class="mb-12">
     <h2 class="text-xl font-bold text-slate-900">
       Nadchodzące konferencje: {entry.data.displayName}
     </h2>
@@ -88,16 +84,14 @@ const breadcrumbs = [
       </div>
     ) : (
       <div class="mt-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 px-6 py-10 text-center">
-        <p class="text-sm font-medium text-slate-500">Zbieramy dane od organizatorów</p>
-        <a
-          href="mailto:kontakt@gdzie-konferencje.pl"
-          class="mt-4 inline-block rounded-md bg-brand-700 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-800"
-        >
-          Dodaj konferencję
-        </a>
+        <p class="text-sm font-medium text-slate-500">Aktualnie brak zaplanowanych konferencji - sprawdz wkrotce.</p>
       </div>
     )}
   </section>
+
+  <div class="prose prose-slate max-w-none prose-headings:font-bold prose-a:text-brand-700 prose-a:no-underline hover:prose-a:underline">
+    <Content />
+  </div>
 
   <!-- LOCAL SEO CITY LINKS -->
   <section class="mt-12">

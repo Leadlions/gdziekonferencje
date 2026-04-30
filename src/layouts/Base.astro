@@ -145,18 +145,12 @@ const cities = [
       <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
 
         <!-- Logo -->
-        <a href="/" class="flex items-center gap-2 text-lg font-bold text-brand-800">
-          <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-            <rect width="32" height="32" rx="6" fill="#075985"/>
-            <rect x="13" y="5" width="6" height="11" rx="3" fill="white"/>
-            <path d="M9 14 Q9 21 16 21 Q23 21 23 14" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <line x1="16" y1="21" x2="16" y2="26" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            <line x1="11" y1="26" x2="21" y2="26" stroke="white" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          gdzie-konferencje.pl
+        <a href="/" class="flex flex-col leading-none">
+          <span class="text-[10px] font-light uppercase tracking-[0.35em] text-slate-400">gdzie</span>
+          <span class="text-[19px] font-extrabold tracking-tight text-brand-800">konferencje</span>
         </a>
 
-        <!-- Desktop Nav -->
+        <!-- Desktop Nav (right-aligned) -->
         <nav class="hidden items-center gap-0.5 lg:flex">
 
           <!-- Konferencje dropdown -->
@@ -203,14 +197,8 @@ const cities = [
           </a>
         </nav>
 
-        <!-- Right: contact + hamburger -->
+        <!-- Right: hamburger -->
         <div class="flex items-center gap-2">
-          <a
-            href="mailto:kontakt@gdzie-konferencje.pl"
-            class="hidden rounded-md border border-brand-300 px-4 py-2 text-sm font-semibold text-brand-700 transition-colors hover:bg-brand-50 lg:block"
-          >
-            Kontakt
-          </a>
           <button
             id="menu-toggle"
             class="rounded-md p-2 text-slate-600 transition-colors hover:bg-slate-100 lg:hidden"
@@ -246,7 +234,6 @@ const cities = [
           <div class="mt-3 border-t border-slate-100 pt-3">
             <a href="/blog/" class="block rounded-lg px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700">Blog ekspercki</a>
             <a href="/dla-dentystow/" class="block rounded-lg px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700">Dla dentystow</a>
-            <a href="mailto:kontakt@gdzie-konferencje.pl" class="block rounded-lg px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700">Kontakt</a>
           </div>
         </div>
       </div>
@@ -287,7 +274,7 @@ const cities = [
             <p class="text-sm font-semibold text-slate-800">Portal</p>
             <ul class="mt-3 space-y-2 text-sm text-slate-600">
               <li><a href="/blog/" class="hover:text-brand-700">Blog ekspercki</a></li>
-              <li><a href="mailto:kontakt@gdzie-konferencje.pl" class="hover:text-brand-700">Kontakt</a></li>
+              <li><a href="/dla-dentystow/" class="hover:text-brand-700">Dla dentystow</a></li>
             </ul>
           </div>
         </div>
