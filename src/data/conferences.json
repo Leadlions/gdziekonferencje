@@ -4,7 +4,9 @@
     "date": "4-6 września 2025",
     "city": "Nadarzyn (Ptak Warsaw Expo)",
     "specialty": "Stomatologia ogólna",
-    "slugs": ["stomatologia"],
+    "slugs": [
+      "stomatologia"
+    ],
     "organizer": "Polskie Towarzystwo Stomatologiczne",
     "url": "https://www.kongresstomatologii.pl/"
   },
@@ -13,7 +15,9 @@
     "date": "24-25 października 2025",
     "city": "Warszawa",
     "specialty": "Stomatologia ogólna",
-    "slugs": ["stomatologia"],
+    "slugs": [
+      "stomatologia"
+    ],
     "organizer": "Forum Media Polska",
     "url": "https://www.konferencja-stomatologiczna.pl/"
   },
@@ -22,7 +26,9 @@
     "date": "26-28 września 2025",
     "city": "Słok k. Bełchatowa",
     "specialty": "Stomatologia ogólna",
-    "slugs": ["stomatologia"],
+    "slugs": [
+      "stomatologia"
+    ],
     "organizer": "Okręgowa Izba Lekarska w Łodzi",
     "url": "https://nil.org.pl/dla-lekarzy/dla-stomatologow/8749-wydarzenia-stomatologiczne-oil-2025"
   },
@@ -31,7 +37,9 @@
     "date": "28-30 listopada 2025",
     "city": "Wisła",
     "specialty": "Stomatologia ogólna",
-    "slugs": ["stomatologia"],
+    "slugs": [
+      "stomatologia"
+    ],
     "organizer": "Okręgowa Izba Lekarska w Katowicach",
     "url": "https://nil.org.pl/dla-lekarzy/dla-stomatologow/8749-wydarzenia-stomatologiczne-oil-2025"
   },
@@ -40,7 +48,9 @@
     "date": "24-26 października 2025",
     "city": "Rytro",
     "specialty": "Stomatologia ogólna",
-    "slugs": ["stomatologia"],
+    "slugs": [
+      "stomatologia"
+    ],
     "organizer": "Okręgowa Izba Lekarska w Krakowie",
     "url": "https://nil.org.pl/dla-lekarzy/dla-stomatologow/8749-wydarzenia-stomatologiczne-oil-2025"
   },
@@ -49,7 +59,11 @@
     "date": "7 marca 2026",
     "city": "Bydgoszcz",
     "specialty": "Stomatologia, Endodoncja, Protetyka",
-    "slugs": ["stomatologia", "endodoncja", "protetyka"],
+    "slugs": [
+      "stomatologia",
+      "endodoncja",
+      "protetyka"
+    ],
     "organizer": "DentalTutor",
     "url": "https://dentaltutor.pl/konferencja-2026/"
   },
@@ -58,7 +72,9 @@
     "date": "16-18 kwietnia 2026",
     "city": "Kraków (EXPO Kraków)",
     "specialty": "Stomatologia ogólna",
-    "slugs": ["stomatologia"],
+    "slugs": [
+      "stomatologia"
+    ],
     "organizer": "Targi w Krakowie / PTS",
     "url": "https://krakdent.pl/"
   },
@@ -67,7 +83,12 @@
     "date": "15-17 maja 2026",
     "city": "Kielce",
     "specialty": "Stomatologia, Periodontologia, Endodoncja, Protetyka",
-    "slugs": ["stomatologia", "periodontologia", "endodoncja", "protetyka"],
+    "slugs": [
+      "stomatologia",
+      "periodontologia",
+      "endodoncja",
+      "protetyka"
+    ],
     "organizer": "Wydawnictwo Kwintesencja",
     "url": "https://kwintesencja.com.pl/konferencje/dentopolis-2026"
   },
@@ -76,7 +97,9 @@
     "date": "16-17 maja 2026",
     "city": "Łódź",
     "specialty": "Stomatologia ogólna",
-    "slugs": ["stomatologia"],
+    "slugs": [
+      "stomatologia"
+    ],
     "organizer": "Bestom Dentonet.pl",
     "url": "https://www.asysdent.pl/"
   },
@@ -85,7 +108,10 @@
     "date": "29-31 maja 2026",
     "city": "Wrocław",
     "specialty": "Stomatologia laserowa, Implantologia",
-    "slugs": ["stomatologia", "implantologia"],
+    "slugs": [
+      "stomatologia",
+      "implantologia"
+    ],
     "organizer": "Polskie Towarzystwo Stomatologii Laserowej",
     "url": "https://ptsl.com.pl/event/5th-international-congress-for-ptsl/"
   },
@@ -94,7 +120,10 @@
     "date": "11-13 czerwca 2026",
     "city": "Poznań (MTP Expo)",
     "specialty": "Stomatologia, Protetyka",
-    "slugs": ["stomatologia", "protetyka"],
+    "slugs": [
+      "stomatologia",
+      "protetyka"
+    ],
     "organizer": "Organizatorzy CEDE / PTProtet",
     "url": "https://www.cede.pl/"
   },
@@ -103,7 +132,12 @@
     "date": "19-21 czerwca 2026",
     "city": "Serock",
     "specialty": "Stomatologia, Implantologia, Ortodoncja, Periodontologia",
-    "slugs": ["stomatologia", "implantologia", "ortodoncja", "periodontologia"],
+    "slugs": [
+      "stomatologia",
+      "implantologia",
+      "ortodoncja",
+      "periodontologia"
+    ],
     "organizer": "Okręgowa Izba Lekarska w Warszawie",
     "url": "https://izba-lekarska.pl/doskonalenie-zawodowe/szkolenia-i-konferencje/konferencje-dla-lekarzy-dentystow/mss-2026-dla-lekarzy.html"
   },
@@ -112,7 +146,9 @@
     "date": "12-13 czerwca 2026",
     "city": "Sopot",
     "specialty": "Stomatologia estetyczna",
-    "slugs": ["stomatologia-estetyczna"],
+    "slugs": [
+      "stomatologia-estetyczna"
+    ],
     "organizer": "PASE",
     "url": "https://pase.org.pl/"
   },
@@ -121,7 +157,10 @@
     "date": "17-19 września 2026",
     "city": "Józefów k. Warszawy",
     "specialty": "Implantologia, Protetyka",
-    "slugs": ["implantologia", "protetyka"],
+    "slugs": [
+      "implantologia",
+      "protetyka"
+    ],
     "organizer": "Denon Dental",
     "url": "https://kongres.dental.pl/program-kongresu"
   },
@@ -130,7 +169,9 @@
     "date": "6-7 listopada 2026",
     "city": "Warszawa",
     "specialty": "Implantologia",
-    "slugs": ["implantologia"],
+    "slugs": [
+      "implantologia"
+    ],
     "organizer": "Polskie Stowarzyszenie Implantologiczne (PSI)",
     "url": "https://psi-icoi.pl/kongresy"
   },
@@ -139,7 +180,9 @@
     "date": "23-26 września 2026",
     "city": "Warszawa (Hilton Warsaw City)",
     "specialty": "Ortodoncja",
-    "slugs": ["ortodoncja"],
+    "slugs": [
+      "ortodoncja"
+    ],
     "organizer": "Polskie Towarzystwo Ortodontyczne",
     "url": "https://zjazdpto.pl/pl/"
   },
@@ -148,7 +191,9 @@
     "date": "3-5 września 2026",
     "city": "Warszawa",
     "specialty": "Stomatologia ogólna",
-    "slugs": ["stomatologia"],
+    "slugs": [
+      "stomatologia"
+    ],
     "organizer": "Polskie Towarzystwo Stomatologiczne",
     "url": "https://pts.net.pl/"
   },
@@ -157,7 +202,9 @@
     "date": "15-17 października 2026",
     "city": "Brzask (Pałac Getz)",
     "specialty": "Dysfunkcje narządu żucia, Okluzja",
-    "slugs": ["stomatologia"],
+    "slugs": [
+      "stomatologia"
+    ],
     "organizer": "Polskie Towarzystwo Dysfunkcji Narządu Żucia",
     "url": "https://dysfunkcje.pl/"
   },
@@ -166,7 +213,10 @@
     "date": "10-13 grudnia 2026",
     "city": "Sopot",
     "specialty": "Implantologia, Periodontologia",
-    "slugs": ["implantologia", "periodontologia"],
+    "slugs": [
+      "implantologia",
+      "periodontologia"
+    ],
     "organizer": "Polskie Stowarzyszenie Implantologiczne (PSI)",
     "url": "https://psi-icoi.pl/kongresy"
   },
@@ -175,7 +225,9 @@
     "date": "8-10 maja 2025",
     "city": "Lublin",
     "specialty": "Chirurgia stomatologiczna",
-    "slugs": ["chirurgia-stomatologiczna"],
+    "slugs": [
+      "chirurgia-stomatologiczna"
+    ],
     "organizer": "Polskie Towarzystwo Chirurgii Stomatologicznej i Szczękowo-Twarzowej",
     "url": "http://www.ptchsist.pl/konges-2025/"
   },
@@ -184,7 +236,9 @@
     "date": "24-25 października 2025",
     "city": "Toruń (Aula UMK)",
     "specialty": "Stomatologia ogólna",
-    "slugs": ["stomatologia"],
+    "slugs": [
+      "stomatologia"
+    ],
     "organizer": "Expo-Andre",
     "url": "https://expo-andre.pl/expodent/"
   },
@@ -193,7 +247,9 @@
     "date": "22 listopada 2025",
     "city": "Kraków",
     "specialty": "Ortodoncja",
-    "slugs": ["ortodoncja"],
+    "slugs": [
+      "ortodoncja"
+    ],
     "organizer": "Elamed Media Group",
     "url": "https://konferencja-owp.elamed.pl/"
   },
@@ -202,7 +258,9 @@
     "date": "21-22 lutego 2025",
     "city": "Warszawa",
     "specialty": "Periodontologia",
-    "slugs": ["periodontologia"],
+    "slugs": [
+      "periodontologia"
+    ],
     "organizer": "C.WITT Dental / Polskie Towarzystwo Periodontologiczne",
     "url": "https://cwittdental.pl/kursy/vii-konferencja-periodontologiczna-2025/"
   },
@@ -211,7 +269,9 @@
     "date": "4 października 2025",
     "city": "Warszawa",
     "specialty": "Implantologia",
-    "slugs": ["implantologia"],
+    "slugs": [
+      "implantologia"
+    ],
     "organizer": "MEDIF sp. z o.o.",
     "url": "https://medifday.pl/"
   },
@@ -220,7 +280,9 @@
     "date": "19-20 września 2025",
     "city": "Kraków",
     "specialty": "Ortodoncja, Alignery",
-    "slugs": ["ortodoncja"],
+    "slugs": [
+      "ortodoncja"
+    ],
     "organizer": "Polska Akademia Alignerowa",
     "url": "https://paacongress.pl/"
   },
@@ -229,7 +291,10 @@
     "date": "6-7 marca 2026",
     "city": "Warszawa (Hotel Marriott)",
     "specialty": "Stomatologia cyfrowa, Protetyka",
-    "slugs": ["stomatologia", "protetyka"],
+    "slugs": [
+      "stomatologia",
+      "protetyka"
+    ],
     "organizer": "Optident",
     "url": "https://lp.optident.pl/kongres-cadcam"
   },
@@ -238,7 +303,9 @@
     "date": "20-21 marca 2026",
     "city": "Łódź (Vienna House Andel's)",
     "specialty": "Endodoncja",
-    "slugs": ["endodoncja"],
+    "slugs": [
+      "endodoncja"
+    ],
     "organizer": "Dental Class",
     "url": "https://dentalclass.pl/event/endomeeting-2026/"
   },
@@ -247,7 +314,9 @@
     "date": "20-21 marca 2026",
     "city": "Warszawa",
     "specialty": "Periodontologia",
-    "slugs": ["periodontologia"],
+    "slugs": [
+      "periodontologia"
+    ],
     "organizer": "Polskie Towarzystwo Periodontologiczne / WUM",
     "url": "https://periodontologia.wum.edu.pl/konferencja-polskiego-towarzystwa-periodontologicznego-perio-2026"
   },
@@ -256,7 +325,9 @@
     "date": "29-31 maja 2026",
     "city": "Wrocław (Q Hotel Plus Bielany)",
     "specialty": "Implantologia",
-    "slugs": ["implantologia"],
+    "slugs": [
+      "implantologia"
+    ],
     "organizer": "Polskie Towarzystwo Stomatologiczne",
     "url": "https://wdi.wroclaw.pl/"
   },
@@ -265,7 +336,11 @@
     "date": "17-18 kwietnia 2026",
     "city": "Kraków (EXPO Kraków)",
     "specialty": "Stomatologia estetyczna, Ortodoncja",
-    "slugs": ["stomatologia", "stomatologia-estetyczna", "ortodoncja"],
+    "slugs": [
+      "stomatologia",
+      "stomatologia-estetyczna",
+      "ortodoncja"
+    ],
     "organizer": "Targi w Krakowie",
     "url": "https://dentalspaghetti.pl"
   },
@@ -274,7 +349,9 @@
     "date": "28-31 maja 2026",
     "city": "Jurata (Hotel Delfin)",
     "specialty": "Stomatologia ogólna",
-    "slugs": ["stomatologia"],
+    "slugs": [
+      "stomatologia"
+    ],
     "organizer": "Komisja Stomatologiczna Wojskowej Izby Lekarskiej",
     "url": "https://szkolastomatologii.pl/dentwil26"
   },
@@ -283,7 +360,10 @@
     "date": "17 października 2026",
     "city": "Warszawa (DoubleTree by Hilton)",
     "specialty": "Stomatologia ogólna, Endodoncja",
-    "slugs": ["stomatologia", "endodoncja"],
+    "slugs": [
+      "stomatologia",
+      "endodoncja"
+    ],
     "organizer": "Medyczne Centrum Szkoleniowe Karaś",
     "url": "https://powerdentgirls.pl/"
   },
@@ -292,7 +372,9 @@
     "date": "2-12 sierpnia 2026",
     "city": "Olsztyn (Hotel Omega)",
     "specialty": "Ortodoncja",
-    "slugs": ["ortodoncja"],
+    "slugs": [
+      "ortodoncja"
+    ],
     "organizer": "Polkard Sp. z o.o.",
     "url": "https://kampusortodontyczny.pl/"
   },
@@ -301,7 +383,9 @@
     "date": "3 października 2026",
     "city": "Warszawa",
     "specialty": "Implantologia",
-    "slugs": ["implantologia"],
+    "slugs": [
+      "implantologia"
+    ],
     "organizer": "MEDIF sp. z o.o.",
     "url": "https://medifday.pl/"
   }
